@@ -6,27 +6,27 @@ import Constants from 'expo-constants';
 const images = [
   {
     name: 'exterior',
-    img: require('../assets/images/local-market/aeon-mall-01.jpg'),
+    img: require('../../assets/images/local-market/aeon-mall-01.jpg'),
   },
   {
     name: 'kitchen',
-    img: require('../assets/images/local-market/boeng-keng-kang-market-02.jpg'),
+    img: require('../../assets/images/local-market/boeng-keng-kang-market-02.jpg'),
   },
   {
     name: 'living area',
-    img: require('../assets/images/local-market/central-market-01.jpg'),
+    img: require('../../assets/images/local-market/central-market-01.jpg'),
   },
   {
     name: 'bathroom',
-    img: require('../assets/images/local-market/eden-garden-mall-01.jpg'),
+    img: require('../../assets/images/local-market/eden-garden-mall-01.jpg'),
   },
   {
     name: 'bedroom',
-    img: require('../assets/images/local-market/eden-garden-mall-02.jpg'),
+    img: require('../../assets/images/local-market/eden-garden-mall-02.jpg'),
   },
   {
     name: 'dining room',
-    img: require('../assets/images/local-market/old-market-01.jpg'),
+    img: require('../../assets/images/local-market/old-market-01.jpg'),
   },
 ];
 
@@ -40,6 +40,7 @@ export default function CarouselView() {
         showsControls={false}
         dotStyle={styles.dotStyle}
         activeDotStyle={[styles.dotStyle, { backgroundColor: 'white' }]}
+        autoplay
       >
         {images.map((img) => (
           <Image style={styles.image} source={img.img} key={img.name} />
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   carouselContainer: {
-    height: (height - marginTop) / 1.9,
+    height: (height - marginTop) / 2.5,
     marginHorizontal: 10,
     marginTop,
   },
