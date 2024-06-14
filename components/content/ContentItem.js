@@ -1,7 +1,16 @@
 import { View, Text, StyleSheet, Pressable, Image, Platform } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
+
 function ContentItem({id, title, imageUrl}) {
+    const navigation = useNavigation();
+
+    function pressHandler() {
+        navigation.navigate('ContentDetail', {
+            contentId: id
+        })
+    }
     return (
-        <Pressable style={styles.container}>
+        <Pressable style={styles.container} onPress={pressHandler}>
             <Image source={{uri: imageUrl}} style={styles.image}/>
             <Text style={styles.title}>{title}</Text>
         </Pressable>

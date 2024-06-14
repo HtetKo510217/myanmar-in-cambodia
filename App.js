@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import HomeScreen from './screens/HomeScreen';
 import CategoriesScreen from './screens/CategoriesScreen';
 import ContentScreen from './screens/ContentScreen';
+import ContentDetailScreen from './screens/ContentDetailScreen';
 import { Ionicons } from '@expo/vector-icons';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -70,6 +71,11 @@ export default function App() {
             name="Content"
             component={ContentScreen}
             options={{ title: 'Content' }}
+          />
+          <Stack.Screen
+            name="ContentDetail"
+            component={ContentDetailScreen}
+            options={{ title: 'Content Detail' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
