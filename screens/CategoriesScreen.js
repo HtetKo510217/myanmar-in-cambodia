@@ -1,10 +1,29 @@
-import { View, Text } from 'react-native'
-function CategoriesScreen() {
+import { FlatList } from 'react-native';
+import CategoryGridTile from '../components/CategoryGridTile';
+
+import { CATEGORIES } from '../data/dummy-data';
+
+
+
+function CategoriesScreen({ navigation }) {
+    function renderCategoryItem(itemData) {
+        function pressHandler() {
+            navigation.navigate('Content', {
+                categoryId : itemData.item.id
+            });
+        }
+        return (
+            <CategoryGridTile title={itemData.item.title} color={itemData.item.color} onPress={pressHandler} />
+        );
+    }
     return (
-        <View>
-            <Text>Categories Screen</Text>
-        </View>
+        <FlatList
+            data={CATEGORIES}
+            keyExtractor={(item) => item.id}
+            renderItem={renderCategoryItem}
+            numColumns={2}
+        />
     );
 }
 
-export default CategoriesScreen
+export default CategoriesScreen;

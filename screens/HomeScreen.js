@@ -1,8 +1,9 @@
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
+import CarouselView from '../components/CarouselView';
 function HomeScreen() {
     return (
         <View>
-            <Text>Home Screen</Text>
+            <CarouselView />
         </View>
     );
 }
