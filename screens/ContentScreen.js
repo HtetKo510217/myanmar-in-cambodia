@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 function ContentScreen() {
     return (
-        <View style={styles.container}>
+        <View>
             <Text>Content Screen</Text>
         </View>
     );

@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 function HomeScreen() {
     return (
-        <View style={styles.container}>
+        <View>
             <Text>Home Screen</Text>
         </View>
     );
