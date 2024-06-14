@@ -1,9 +1,14 @@
+import { useLayoutEffect } from 'react';
 import { View, Text, StyleSheet,ScrollView , Image} from 'react-native'
 import { CONTENTS } from '../data/dummy-data';
-function ContentDetailScreen({ route }) {
+function ContentDetailScreen({ route, navigation }) {
     const contentId = route.params.contentId
-
     const content = CONTENTS.find((content) => content.id === contentId);
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: content.title
+        })
+    })
     return (
         <ScrollView>
             <View style={styles.container}>

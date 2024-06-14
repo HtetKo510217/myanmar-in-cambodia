@@ -60,10 +60,11 @@ export default function App() {
             headerStyle: { backgroundColor: '#351401' },
             headerTintColor: 'white',
             contentStyle: { backgroundColor: '#3f2f25' },
+            headerBackTitle: 'Back',
           }}
         >
           <Stack.Screen
-            name="Back to Home"
+            name="Home screen"
             component={DrawerNavigator}
             options={{ headerShown: false }}
           />
