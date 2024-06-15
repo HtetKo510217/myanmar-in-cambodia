@@ -4,6 +4,7 @@ import HomeScreen from './screens/HomeScreen';
 import CategoriesScreen from './screens/CategoriesScreen';
 import ContentScreen from './screens/ContentScreen';
 import ContentDetailScreen from './screens/ContentDetailScreen';
+import ShareContentScreen from './screens/ShareContentScreen';
 import { Ionicons } from '@expo/vector-icons';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -43,6 +44,16 @@ function DrawerNavigator() {
           title: 'Categories',
           drawerIcon: ({ color, size }) => (
             <Ionicons name="list" color={color} size={size} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Share Content"
+        component={ShareContentScreen}
+        options={{
+          title: 'Share Content',
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="share-social" color={color} size={size} />
           ),
         }}
       />
