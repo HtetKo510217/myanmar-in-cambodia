@@ -6,12 +6,14 @@ import * as ImagePicker from 'expo-image-picker';
 import uuid from 'react-native-uuid';
 import Content from '../../models/content';
 import { CATEGORIES } from '../../data/category';
+import { useNavigation } from '@react-navigation/native';
 
 const AddContentForm = ({ onContentAdd }) => {
   const [contentTitle, setContentTitle] = useState('');
   const [contentImageUri, setContentImageUri] = useState('');
   const [contentDescription, setContentDescription] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const navigation = useNavigation();
 
   const handlePickImage = async () => {
     let result = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -32,6 +34,7 @@ const AddContentForm = ({ onContentAdd }) => {
   };
 
   const handleAddContent = () => {
+    
     const newContent = new Content(
       uuid.v4(),
       selectedCategories,
@@ -44,6 +47,9 @@ const AddContentForm = ({ onContentAdd }) => {
     setContentImageUri('');
     setContentDescription('');
     setSelectedCategories([]);
+    
+    navigation.navigate('Home');
+
   };
 
   const categoryItems = CATEGORIES.map((category) => ({
