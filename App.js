@@ -52,6 +52,7 @@ function DrawerNavigator() {
         component={ShareContentScreen}
         options={{
           title: 'Share Content',
+          headerTitleStyle: { color: '#FA6326' },
           drawerIcon: ({ color, size }) => (
             <Ionicons name="share-social" color={color} size={size} />
           ),

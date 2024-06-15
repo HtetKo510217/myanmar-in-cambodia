@@ -1,6 +1,7 @@
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 import { useLayoutEffect } from 'react';
-import { CONTENTS, CATEGORIES } from '../data/dummy-data';
+import { CONTENTS } from '../data/dummy-data';
+import { CATEGORIES } from '../data/category'
 import ContentItem from '../components/content/ContentItem';
 function ContentScreen({ route, navigation }) {
     const catId = route.params.categoryId

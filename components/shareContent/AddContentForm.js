@@ -33,7 +33,7 @@ const AddContentForm = ({ onContentAdd }) => {
 
   const handleAddContent = () => {
     const newContent = new Content(
-      uuid.v4(), // Automatically generate a unique content ID
+      uuid.v4(),
       selectedCategories,
       contentTitle,
       contentImageUri,
@@ -54,12 +54,29 @@ const AddContentForm = ({ onContentAdd }) => {
   return (
     <ScrollView style={styles.container}>
     <Card containerStyle={styles.card}>
-      <Text h4 style={styles.header}>Add New Content</Text>
+      <Text h4 style={styles.header}>မင်္ဂလာပါ</Text>
       <Input
-        placeholder="Content Title"
+        placeholder="သင်တင်ချင်တဲ. အကြောင်းအရာ"
         value={contentTitle}
         onChangeText={setContentTitle}
       />
+      
+      <Input
+        placeholder="အကြောင်းအရာ အသေးစိတ်"
+        value={contentDescription}
+        onChangeText={setContentDescription}
+        style={styles.descriptionInput}
+        multiline
+      />
+      <Text style={styles.label}>မှန်ကန်စွာ ရွေးချယ်ပါ</Text>
+      <Picker
+        selectedValue={selectedCategories}
+        onValueChange={(itemValue) => setSelectedCategories(itemValue)}
+      >
+        {categoryItems.map((item) => (
+          <Picker.Item key={item.value} label={item.label} value={item.value} style={styles.pickerItem} />
+        ))}
+      </Picker>
       <TouchableOpacity style={styles.imagePicker} onPress={handlePickImage}>
         {contentImageUri ? (
           <Image source={{ uri: contentImageUri }} style={styles.image} />
@@ -67,23 +84,7 @@ const AddContentForm = ({ onContentAdd }) => {
           <Text>Select an Image</Text>
         )}
       </TouchableOpacity>
-      <Input
-        placeholder="Content Description"
-        value={contentDescription}
-        onChangeText={setContentDescription}
-        style={styles.descriptionInput}
-        multiline
-      />
-      <Text style={styles.label}>Select Categories</Text>
-      <Picker
-        selectedValue={selectedCategories}
-        onValueChange={(itemValue) => setSelectedCategories([itemValue])}
-      >
-        {categoryItems.map((item) => (
-          <Picker.Item key={item.value} label={item.label} value={item.value} />
-        ))}
-      </Picker>
-      <Button title="Share Content" onPress={handleAddContent} />
+      <Button title="မျှဝေမယ်" buttonStyle={{ backgroundColor: '#FA6326' }} containerStyle={{ marginTop: 20 }} onPress={handleAddContent} />
     </Card>
     </ScrollView>
   );
@@ -93,15 +94,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 5,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: 'lightgray',
     paddingBottom: 100,
   },
   card: {
     borderRadius: 10,
-    padding: 20,
+    padding: 10,
+    paddingBottom: 50,
   },
   header: {
-    marginBottom: 10,
+    marginBottom: 15,
+    textAlign: 'center',
+    color: '#FA6326',
+    fontWeight: 'bold',
   },
   imagePicker: {
     alignItems: 'center',
@@ -115,7 +120,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   descriptionInput: {
-    minHeight: 500, // Increase height for longer content
+    minHeight: 500, 
     borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 10,
@@ -125,8 +130,15 @@ const styles = StyleSheet.create({
   },
 
   label: {
-    marginBottom: 10,
-    marginTop: 10,
+    margin: 10,
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: '#FA6326',
+  },
+
+  pickerItem: {
+    fontSize: 16,
+    color: '#FA6326',
   },
 });
 

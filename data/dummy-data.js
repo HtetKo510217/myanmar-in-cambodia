@@ -1,16 +1,4 @@
-import Category from '../models/category';
 import Content from '../models/content';
-
-export const CATEGORIES = [
-    new Category('c1', 'စျေးနှုန်းသင်. localဆိုင်များ', '#f5428d'),
-    new Category('c2', 'မြန်မာ ဆိုင်များ', '#f54242'),
-    new Category('c3', 'လည်ပတ်သင်.သောနေရာများ', '#f5a442'),
-    new Category('c4', 'အလုပ်အကိုင်များ', '#f5d142'),
-    new Category('c5', 'တည်းခိုစရာ နေရာများ', '#368dff'),
-    new Category('c6', 'ဆေးရုံ/ဆေးခန်းများ', '#41d95d'),
-    new Category('c7', 'ဆောင်ရန်/ရှောင်ရန်များ', '#9eecff'),
-    new Category('c8','အခြေခံ ခမာ စကား','#f5a442'),
-];
 
 export const CONTENTS = [
     // c1: စျေးနှုန်းသင်. localဆိုင်များ

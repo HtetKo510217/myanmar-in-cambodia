@@ -1,6 +1,7 @@
 import { Pressable, View, Text, StyleSheet, Platform } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-function CategoryGridTile({ title, color,onPress }) {
+function CategoryGridTile({ title, color, icon, onPress }) {
   return (
     <View style={styles.gridItem}>
       <Pressable
@@ -12,6 +13,7 @@ function CategoryGridTile({ title, color,onPress }) {
         onPress={onPress}
       >
         <View style={[styles.innerContainer, { backgroundColor: color }]}>
+          <Ionicons name={icon} size={26} color="white"  />
           <Text style={styles.title}>{title}</Text>
         </View>
       </Pressable>
@@ -25,7 +27,7 @@ const styles = StyleSheet.create({
   gridItem: {
     flex: 1,
     margin: 16,
-    height: 120,
+    height: 70,
     borderRadius: 8,
     elevation: 4,
     backgroundColor: 'white',
@@ -43,10 +45,11 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flex: 1,
-    padding: 5,
+    flexDirection: 'row',
+    padding: 15,
     borderRadius: 8,
-    justifyContent: 'center',
     alignItems: 'center',
+    gap: 30,
   },
   title: {
     fontWeight: 'bold',

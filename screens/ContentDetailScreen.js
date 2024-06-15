@@ -6,7 +6,8 @@ function ContentDetailScreen({ route, navigation }) {
     const content = CONTENTS.find((content) => content.id === contentId);
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: content.title
+            title: content.title,
+            headerTitleStyle: { color: '#FA6326' }
         })
     })
     return (
