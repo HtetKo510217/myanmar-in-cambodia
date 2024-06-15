@@ -8,6 +8,6 @@ export const CATEGORIES = [
     new Category('c5', 'တည်းခိုစရာ နေရာများ', '#368dff','business-outline'),
     new Category('c6', 'ဆေးရုံ/ဆေးခန်းများ', '#41d95d','medical-outline'),
     new Category('c8','အခြေခံ ခမာ စကား','#f5a442','language-outline'),
-    new Category('c9','ဗီဇာအကြောင်း သိကောင်းစရာ','#f54242','info-outline'),
+    new Category('c9','ဗီဇာအကြောင်း သိကောင်းစရာ','#f54242','information-circle'),
     new Category('c7', 'ဆောင်ရန်/ရှောင်ရန်များ', '#9eecff','notifications-outline'),
 ];
