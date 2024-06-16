@@ -5,6 +5,7 @@ import CategoriesScreen from './screens/CategoriesScreen';
 import ContentScreen from './screens/ContentScreen';
 import ContentDetailScreen from './screens/ContentDetailScreen';
 import ShareContentScreen from './screens/ShareContentScreen';
+import LoginScreen from './screens/LoginScreen';
 import { Ionicons } from '@expo/vector-icons';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -14,7 +15,12 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
-function DrawerNavigator() {
+function DrawerNavigator({ navigation }) {
+  
+  function pressHandler() {
+    navigation.navigate('Login');
+  }
+
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -34,6 +40,15 @@ function DrawerNavigator() {
           title: 'Home',
           drawerIcon: ({ color, size }) => (
             <Ionicons name="home" color={color} size={size} />
+          ),
+          headerRight: () => (
+            <Ionicons
+              name="log-in"
+              size={24}
+              color="#FA6326"
+              style={{ marginRight: 15 }}
+              onPress={pressHandler}
+            />
           ),
         }}
       />
@@ -89,6 +104,11 @@ export default function App() {
             name="ContentDetail"
             component={ContentDetailScreen}
             options={{ title: 'Content Detail' }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ title: 'Login' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
