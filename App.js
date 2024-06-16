@@ -6,6 +6,8 @@ import ContentScreen from './screens/ContentScreen';
 import ContentDetailScreen from './screens/ContentDetailScreen';
 import ShareContentScreen from './screens/ShareContentScreen';
 import LoginScreen from './screens/LoginScreen';
+import SignUpScreen from './screens/SignupScreen';
+
 import { Ionicons } from '@expo/vector-icons';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -109,6 +111,11 @@ export default function App() {
             name="Login"
             component={LoginScreen}
             options={{ title: 'Login' }}
+          />
+          <Stack.Screen
+            name="Signup"
+            component={SignUpScreen}
+            options={{ title: 'Sign Up' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
