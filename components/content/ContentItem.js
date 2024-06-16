@@ -3,7 +3,6 @@ import { useNavigation } from '@react-navigation/native';
 
 function ContentItem({id, title, imageUrl}) {
     const navigation = useNavigation();
-
     function pressHandler() {
         navigation.navigate('ContentDetail', {
             contentId: id
@@ -11,8 +10,8 @@ function ContentItem({id, title, imageUrl}) {
     }
     return (
         <Pressable style={styles.container} onPress={pressHandler}>
-            <Image source={{uri: imageUrl}} style={styles.image}/>
-            <Text style={styles.title}>{title}</Text>
+        <Image source={{uri: `http://192.168.0.109:5000/api/${imageUrl}`}} style={styles.image}/>
+        <Text style={styles.title}>{title}</Text>
         </Pressable>
     );
 }

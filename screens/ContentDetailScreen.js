@@ -1,19 +1,56 @@
-import { useLayoutEffect } from 'react';
-import { View, Text, StyleSheet,ScrollView , Image} from 'react-native'
-import { CONTENTS } from '../data/dummy-data';
+import { useLayoutEffect, useState, useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
+
 function ContentDetailScreen({ route, navigation }) {
-    const contentId = route.params.contentId
-    const content = CONTENTS.find((content) => content.id === contentId);
+    const contentId = route.params.contentId;
+    const [contentData, setContentData] = useState([]);
+    const [content, setContent] = useState(null);
+
+    useEffect(() => {
+        fetchContent();
+    }, []);
+
+    useEffect(() => {
+        if (contentData.length > 0) {
+            const foundContent = contentData.find((content) => content._id === contentId);
+            setContent(foundContent);
+        }
+    }, [contentData]);
+
     useLayoutEffect(() => {
-        navigation.setOptions({
-            title: content.title,
-            headerTitleStyle: { color: '#FA6326' }
-        })
-    })
+        if (content) {
+            navigation.setOptions({
+                title: content.title,
+                headerTitleStyle: { color: '#FA6326' },
+            });
+        }
+    }, [navigation, content]);
+
+    const fetchContent = async () => {
+        try {
+            const response = await fetch('http://192.168.0.109:5000/api/content');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            setContentData(data);
+        } catch (error) {
+            console.error('Error fetching content:', error);
+        }
+    };
+
+    if (!content) {
+        return (
+            <View style={styles.container}>
+                <Text>Loading...</Text>
+            </View>
+        );
+    }
+
     return (
         <ScrollView>
             <View style={styles.container}>
-                <Image source={{uri: content.imageUrl}} style={styles.image}/>
+                <Image source={{uri: `http://192.168.0.109:5000/api/${content.imageUrl}`}} style={styles.image} />
                 <Text style={styles.title}>{content.title}</Text>
                 <Text style={styles.description}>{content.description}</Text>
             </View>
@@ -21,7 +58,7 @@ function ContentDetailScreen({ route, navigation }) {
     );
 }
 
-export default ContentDetailScreen
+export default ContentDetailScreen;
 
 const styles = StyleSheet.create({
     container: {
@@ -44,5 +81,5 @@ const styles = StyleSheet.create({
         margin: 10,
         color: 'white',
         textAlign: 'center',
-    }
-})
+    },
+});
