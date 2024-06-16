@@ -9,6 +9,8 @@ import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignupScreen';
 
 import { Ionicons } from '@expo/vector-icons';
+import AuthContextProvider, { AuthContext } from './store/auth-context';
+import { useContext } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -17,12 +19,9 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
-function DrawerNavigator({ navigation }) {
+function DrawerNavigator() {
+  const authCtx = useContext(AuthContext);
   
-  function pressHandler() {
-    navigation.navigate('Login');
-  }
-
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -45,11 +44,12 @@ function DrawerNavigator({ navigation }) {
           ),
           headerRight: () => (
             <Ionicons
-              name="log-in"
+              name="exit"
               size={24}
               color="#FA6326"
               style={{ marginRight: 15 }}
-              onPress={pressHandler}
+              onPress={authCtx.logout}
+              title="Logout"
             />
           ),
         }}
@@ -79,46 +79,71 @@ function DrawerNavigator({ navigation }) {
   );
 }
 
+function AuthStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: '#351401' },
+        headerTintColor: 'white',
+        contentStyle: { backgroundColor: '#3f2f25' },
+        headerBackTitle: 'Back',
+      }}
+    >
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Signup" component={SignUpScreen} />
+    </Stack.Navigator>
+  );
+}
+
+
+function AuthenticatedStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: '#351401' },
+        headerTintColor: 'white',
+        contentStyle: { backgroundColor: '#3f2f25' },
+        headerBackTitle: 'Back',
+      }}
+    >
+      <Stack.Screen
+        name="Home screen"
+        component={DrawerNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Content"
+        component={ContentScreen}
+        options={{ title: 'Content' }}
+      />
+      <Stack.Screen
+        name="ContentDetail"
+        component={ContentDetailScreen}
+        options={{ title: 'Content Detail' }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function Navigation() {
+  const authCtx = useContext(AuthContext);
+  console.log(authCtx);
+  return (
+    <NavigationContainer>
+      {!authCtx.isAuthenticated && <AuthStack />}
+      {authCtx.isAuthenticated && <AuthenticatedStack />}
+    </NavigationContainer>
+  );
+}
+
 export default function App() {
+
   return (
     <>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: { backgroundColor: '#351401' },
-            headerTintColor: 'white',
-            contentStyle: { backgroundColor: '#3f2f25' },
-            headerBackTitle: 'Back',
-          }}
-        >
-          <Stack.Screen
-            name="Home screen"
-            component={DrawerNavigator}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Content"
-            component={ContentScreen}
-            options={{ title: 'Content' }}
-          />
-          <Stack.Screen
-            name="ContentDetail"
-            component={ContentDetailScreen}
-            options={{ title: 'Content Detail' }}
-          />
-          <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{ title: 'Login' }}
-          />
-          <Stack.Screen
-            name="Signup"
-            component={SignUpScreen}
-            options={{ title: 'Sign Up' }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <AuthContextProvider>
+        <Navigation />
+      </AuthContextProvider>
     </>
   );
 }
