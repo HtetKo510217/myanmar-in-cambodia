@@ -36,3 +36,6 @@ yarn-error.*
 
 # uploads
 uploads/
+
+# env
+.env
