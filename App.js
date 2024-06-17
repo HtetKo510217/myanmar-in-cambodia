@@ -7,14 +7,16 @@ import ContentDetailScreen from './screens/ContentDetailScreen';
 import ShareContentScreen from './screens/ShareContentScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignupScreen';
-
+import LoadingOverlay from './components/ui/LoadingOverlay';
 import { Ionicons } from '@expo/vector-icons';
 import AuthContextProvider, { AuthContext } from './store/auth-context';
-import { useContext } from 'react';
+import { useContext , useEffect, useState } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { View } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -136,13 +138,43 @@ function Navigation() {
   );
 }
 
+function Root() {
+  const [isTryingLogin, setIsTryingLogin] = useState(true);
+
+  const authCtx = useContext(AuthContext);
+
+  useEffect(() => {
+    async function fetchToken() {
+      const storedToken = await AsyncStorage.getItem('token');
+
+      if (storedToken) {
+        authCtx.authenticate(storedToken);
+      }
+
+      setIsTryingLogin(false);
+    }
+
+    fetchToken();
+  }, []);
+
+  if (isTryingLogin) {
+    return (
+      <View style={styles.container}>
+        <LoadingOverlay message="Wecome to Myanmar in Cambodia" />
+      </View>
+    )
+  }
+
+  return <Navigation />;
+}
+
 export default function App() {
 
   return (
     <>
       <StatusBar style="light" />
       <AuthContextProvider>
-        <Navigation />
+        <Root />
       </AuthContextProvider>
     </>
   );
