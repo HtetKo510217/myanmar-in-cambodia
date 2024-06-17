@@ -7,6 +7,7 @@ import ContentDetailScreen from './screens/ContentDetailScreen';
 import ShareContentScreen from './screens/ShareContentScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignupScreen';
+import OnboardingScreen from './screens/OnboardingScreen';
 import LoadingOverlay from './components/ui/LoadingOverlay';
 import { Ionicons } from '@expo/vector-icons';
 import AuthContextProvider, { AuthContext } from './store/auth-context';
@@ -91,6 +92,11 @@ function AuthStack() {
         headerBackTitle: 'Back',
       }}
     >
+      <Stack.Screen
+        name="Onboarding"
+        component={OnboardingScreen}
+        options={{ headerShown: false , title: 'Onboarding' }}
+      />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignUpScreen} />
     </Stack.Navigator>
