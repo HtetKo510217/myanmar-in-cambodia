@@ -1,58 +1,35 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import AddContentForm from './AddContentForm';
-
+import { uploadToFirebase } from "../../firebase-config"
+import { storeData } from '../../util/http';
 const MainForm = () => {
   const [contents, setContents] = useState([]);
 
   const handleContentAdd = (content) => {
     setContents([...contents, content]);
-    console.log('Content added:', content);
+    // console.log('Content added:', content);
     storeDataInDB(content);
   };
 
   const storeDataInDB = async (data) => {
-    const url = 'http://192.168.0.109:5000/api/content';
-    console.log('Data to be stored:', data);
-
-    const formData = new FormData();
-    formData.append('content', JSON.stringify({
+    const {uri} = data.imageUrl;
+    const fileName = uri.split("/").pop();
+    const uploadResp = await uploadToFirebase(uri, fileName, (v) =>
+      console.log(v)
+    );
+    console.log("uploadResp", uploadResp)
+    const {downloadUrl} = uploadResp;
+    console.log("downloadURL", downloadUrl)
+    const postData = {
       id: data.id,
       categoryIds: data.categoryIds,
       title: data.title,
       description: data.description,
-    }));
-
-    if (data.imageUrl) {
-      const fileName = data.imageUrl.split('/').pop();
-      formData.append('image', {
-        uri: data.imageUrl,
-        type: 'image/jpeg',
-        name: fileName,
-      });
-    } else {
-      console.error('Error: imageUri is undefined');
+      imageUrl: downloadUrl,
     }
-
-    console.log('FormData:', formData);
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const result = await response.json();
-      console.log('Data stored in DB:', result);
-    } catch (error) {
-      console.error('Error storing data in DB:', error);
-    }
+    console.log("postData", postData)
+    storeData(postData);
   };
 
   return (

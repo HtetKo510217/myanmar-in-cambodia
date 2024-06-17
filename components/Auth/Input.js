@@ -35,13 +35,13 @@ const styles = StyleSheet.create({
   },
   label: {
     color: 'white',
-    marginBottom: 4,
+    marginBottom: 8,
   },
   labelInvalid: {
     color: Colors.error500,
   },
   input: {
-    paddingVertical: 8,
+    paddingVertical: 14,
     paddingHorizontal: 6,
     backgroundColor: Colors.primary100,
     borderRadius: 4,

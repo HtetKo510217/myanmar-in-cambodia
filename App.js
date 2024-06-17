@@ -11,20 +11,21 @@ import OnboardingScreen from './screens/OnboardingScreen';
 import LoadingOverlay from './components/ui/LoadingOverlay';
 import { Ionicons } from '@expo/vector-icons';
 import AuthContextProvider, { AuthContext } from './store/auth-context';
-import { useContext , useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
+import { fbApp } from './firebase-config';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function DrawerNavigator() {
   const authCtx = useContext(AuthContext);
-  
+
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -51,7 +52,25 @@ function DrawerNavigator() {
               size={24}
               color="#FA6326"
               style={{ marginRight: 15 }}
-              onPress={authCtx.logout}
+              onPress={() => {
+                Alert.alert(
+                  'Logout',
+                  'Are you sure you want to logout?',
+                  [
+                    {
+                      text: 'Cancel',
+                      style: 'cancel',
+                    },
+                    {
+                      text: 'Logout',
+                      onPress: () => {
+                        authCtx.logout();
+                      },
+                    },
+                  ],
+                  { cancelable: false }
+                );
+              }}
               title="Logout"
             />
           ),
@@ -95,7 +114,7 @@ function AuthStack() {
       <Stack.Screen
         name="Onboarding"
         component={OnboardingScreen}
-        options={{ headerShown: false , title: 'Onboarding' }}
+        options={{ headerShown: false, title: 'Onboarding' }}
       />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignUpScreen} />
@@ -175,7 +194,7 @@ function Root() {
 }
 
 export default function App() {
-
+  console.log(fbApp)
   return (
     <>
       <StatusBar style="light" />
