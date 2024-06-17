@@ -1,18 +1,23 @@
 import { useLayoutEffect, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
-
+import { getData } from '../util/http';
 function ContentDetailScreen({ route, navigation }) {
     const contentId = route.params.contentId;
     const [contentData, setContentData] = useState([]);
     const [content, setContent] = useState(null);
 
     useEffect(() => {
+        async function fetchContent() {
+            const contents = await getData();
+            setContentData(contents);
+        }
+
         fetchContent();
     }, []);
 
     useEffect(() => {
         if (contentData.length > 0) {
-            const foundContent = contentData.find((content) => content._id === contentId);
+            const foundContent = contentData.find((content) => content.id === contentId);
             setContent(foundContent);
         }
     }, [contentData]);
@@ -26,18 +31,6 @@ function ContentDetailScreen({ route, navigation }) {
         }
     }, [navigation, content]);
 
-    const fetchContent = async () => {
-        try {
-            const response = await fetch('http://192.168.0.109:5000/api/content');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            setContentData(data);
-        } catch (error) {
-            console.error('Error fetching content:', error);
-        }
-    };
 
     if (!content) {
         return (
@@ -50,7 +43,7 @@ function ContentDetailScreen({ route, navigation }) {
     return (
         <ScrollView>
             <View style={styles.container}>
-                <Image source={{uri: `http://192.168.0.109:5000/api/${content.imageUrl}`}} style={styles.image} />
+                <Image source={{ uri: content.imageUrl }} style={styles.image} />
                 <Text style={styles.title}>{content.title}</Text>
                 <Text style={styles.description}>{content.description}</Text>
             </View>

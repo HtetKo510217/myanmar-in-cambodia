@@ -1,14 +1,20 @@
-import React, { useEffect, useState , useLayoutEffect} from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import ContentItem from '../components/content/ContentItem';
 import { CATEGORIES } from '../data/category';
-
+import { getData } from '../util/http';
 function ContentScreen({ route, navigation }) {
     const [contentData, setContentData] = useState([]);
     const catId = route.params.categoryId;
     const displayContent = contentData.filter((content) => content.categoryIds.indexOf(catId) >= 0);
 
     useEffect(() => {
+        async function fetchContent() {
+            const contents = await getData();
+            console.log("contents", contents);
+            setContentData(contents);
+        }
+
         fetchContent();
     }, []);
 
@@ -17,23 +23,11 @@ function ContentScreen({ route, navigation }) {
         navigation.setOptions({ title: categoryTitle, headerTitleStyle: { color: '#FA6326' } });
     }, [catId, navigation]);
 
-    const fetchContent = async () => {
-        try {
-            const response = await fetch('http://192.168.0.109:5000/api/content');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            setContentData(data);
-        } catch (error) {
-            console.error('Error fetching content:', error);
-        }
-    };
 
     const renderContentItem = ({ item }) => {
         return (
             <ContentItem
-                id={item._id}
+                id={item.id}
                 title={item.title}
                 imageUrl={item.imageUrl}
             />
@@ -44,7 +38,7 @@ function ContentScreen({ route, navigation }) {
         <View style={styles.container}>
             <FlatList
                 data={displayContent}
-                keyExtractor={(item) => item._id}
+                keyExtractor={(item) => item.id}
                 renderItem={renderContentItem}
             />
         </View>

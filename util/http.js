@@ -6,3 +6,19 @@ export function storeData(data) {
     data
   );
 }
+
+export async function getData() {
+  const response = await axios.get(`${FIREBASE_DATABASE_URL}/posts.json`);
+  const posts = [];
+  for (const key in response.data) {
+    posts.push({
+      id: key,
+      categoryIds: response.data[key].categoryIds,
+      title : response.data[key].title,
+      description: response.data[key].description,
+      imageUrl: response.data[key].imageUrl
+    });
+  }
+
+  return posts;
+}
