@@ -102,8 +102,31 @@ function DrawerNavigator() {
 }
 
 function AuthStack() {
+  const [isFirstLaunch, setIsFirstLaunch] = useState(null);
+  let routeName;
+  useEffect(() => {
+    AsyncStorage.getItem('alreadyLaunched').then((value) => {
+      if (value == null) {
+        AsyncStorage.setItem('alreadyLaunched', 'true');
+        setIsFirstLaunch(true);
+      } else {
+        setIsFirstLaunch(false);
+      }
+    });
+
+  }, []);
+
+  if (isFirstLaunch === null) {
+    return null;
+  } else if (isFirstLaunch == true) {
+    routeName = 'Onboarding';
+  } else {
+    routeName = 'Login';
+  }
+
   return (
     <Stack.Navigator
+      initialRouteName={routeName}
       screenOptions={{
         headerStyle: { backgroundColor: '#351401' },
         headerTintColor: 'white',
