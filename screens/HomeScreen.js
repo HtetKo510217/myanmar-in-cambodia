@@ -5,7 +5,7 @@ import Button from '../components/home/Button';
 function HomeScreen({ navigation }) {
     function pressHandler() {
         navigation.navigate('Content', {
-            categoryId : 'c7'
+            categoryId : 'c9'
         });
     }
     return (
@@ -15,7 +15,7 @@ function HomeScreen({ navigation }) {
                 <View>
                     <Message title="ကမ္ဘောဒီးယား ကို မလာခင်" message="ကမ္ဘောဒီးယား ကို မလာခင် သိသင်.သမျှ အချက်အလက်တွေကို ဒီကို လာရှာပါ" />
                     <View style={styles.buttonContainer}>
-                        <Button onPress={() => alert('Hello from Button')} setBackground={false}>Join Community</Button>
+                        <Button onPress={() => navigation.navigate('JoinCommunity')} setBackground={false}>Join Community</Button>
                         <Button onPress={pressHandler} setBackground>ဆောင်ရန်/ရှောင်ရန်များ</Button>
                     </View>
                 </View>

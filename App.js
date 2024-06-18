@@ -9,10 +9,11 @@ import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignupScreen';
 import OnboardingScreen from './screens/OnboardingScreen';
 import EditContentScreen from './screens/EditContentScreen';
+import JoinCommunityScreen from './screens/JoinCommunityScreen';
 import LoadingOverlay from './components/ui/LoadingOverlay';
 import { Ionicons } from '@expo/vector-icons';
 import AuthContextProvider, { AuthContext } from './store/auth-context';
-import PostContextProvider, { PostContext } from './store/post-context';
+import PostContextProvider from './store/post-context';
 import { useContext, useEffect, useState } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -177,6 +178,11 @@ function AuthenticatedStack() {
         name="EditContent"
         component={EditContentScreen}
         options={{ title: 'Edit Content' }}
+      />
+      <Stack.Screen
+        name="JoinCommunity"
+        component={JoinCommunityScreen}
+        options={{ title: 'Join Community' }}
       />
     </Stack.Navigator>
     </PostContextProvider>
