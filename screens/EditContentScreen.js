@@ -6,6 +6,7 @@ import { PostContext } from '../store/post-context';
 import { CATEGORIES } from '../data/category';
 import * as ImagePicker from 'expo-image-picker';
 import { updateData } from '../util/http';
+
 function EditContentScreen({ route, navigation }) {
     const { contentId } = route.params;
     const { posts, updatePost } = useContext(PostContext);
@@ -16,6 +17,7 @@ function EditContentScreen({ route, navigation }) {
     const [address, setAddress] = useState('');
     const [contentImageUri, setContentImageUri] = useState('');
     const [contentImageUrl, setContentImageUrl] = useState('');
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         const foundContent = posts.find((content) => content.id === contentId);
@@ -29,6 +31,18 @@ function EditContentScreen({ route, navigation }) {
             setContentImageUrl({ uri: foundContent.imageUrl });
         }
     }, [contentId, posts]);
+
+    const validateForm = () => {
+        const newErrors = {};
+        if (!contentTitle) newErrors.title = 'Title is required.';
+        if (!contentDescription) newErrors.description = 'Description is required.';
+        if (!selectedCategories.length) newErrors.categories = 'Please select at least one category.';
+        if (!contentImageUri) newErrors.image = 'Image is required.';
+        if (!address) newErrors.address = 'Address is required.';
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
     const handlePickImage = async () => {
         let result = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -50,6 +64,8 @@ function EditContentScreen({ route, navigation }) {
     };
 
     const handleUpdateContent = async () => {
+        if (!validateForm()) return;
+
         const updatedContent = {
             id: content.id,
             userId: content.userId,
@@ -64,7 +80,6 @@ function EditContentScreen({ route, navigation }) {
         await updateData(updatedContent);
         console.log('Content updated:', posts);
         navigation.navigate('Home');
-
     };
 
     if (!content) {
@@ -86,6 +101,7 @@ function EditContentScreen({ route, navigation }) {
                 placeholder="Content Title"
                 value={contentTitle}
                 onChangeText={setContentTitle}
+                errorMessage={errors.title}
             />
             <Input
                 placeholder="Description"
@@ -93,6 +109,7 @@ function EditContentScreen({ route, navigation }) {
                 onChangeText={setContentDescription}
                 style={styles.descriptionInput}
                 multiline
+                errorMessage={errors.description}
             />
             <Text style={styles.label}>Choose Categories</Text>
             <Picker
@@ -103,6 +120,7 @@ function EditContentScreen({ route, navigation }) {
                     <Picker.Item key={item.value} label={item.label} value={item.value} style={styles.pickerItem} />
                 ))}
             </Picker>
+            {errors.categories && <Text style={styles.errorText}>{errors.categories}</Text>}
             <TouchableOpacity style={styles.imagePicker} onPress={handlePickImage}>
                 {contentImageUri ? (
                     <Image source={{ uri: contentImageUri }} style={styles.image} />
@@ -110,10 +128,12 @@ function EditContentScreen({ route, navigation }) {
                     <Text>Select an Image</Text>
                 )}
             </TouchableOpacity>
+            {errors.image && <Text style={styles.errorText}>{errors.image}</Text>}
             <Input
                 placeholder="Address"
                 value={address}
                 onChangeText={setAddress}
+                errorMessage={errors.address}
             />
             <View style={styles.btnContainer}>
                 <Button title="Update Content" onPress={handleUpdateContent} />
@@ -163,6 +183,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 10,
         marginBottom: 100,
+    },
+    errorText: {
+        color: 'red',
+        marginBottom: 10,
     },
 });
 

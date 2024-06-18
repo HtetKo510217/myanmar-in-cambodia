@@ -1,4 +1,4 @@
-import React, { useState ,useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, ScrollView, Image, TouchableOpacity, View } from 'react-native';
 import { Input, Button, Text, Card } from '@rneui/themed';
 import { Picker } from '@react-native-picker/picker';
@@ -9,6 +9,7 @@ import { CATEGORIES } from '../../data/category';
 import { useNavigation } from '@react-navigation/native';
 import LoadingOverlay from '../ui/LoadingOverlay';
 import { AuthContext } from '../../store/auth-context';
+
 const AddContentForm = ({ onContentAdd }) => {
   const [contentTitle, setContentTitle] = useState('');
   const [contentImageUri, setContentImageUri] = useState('');
@@ -17,8 +18,22 @@ const AddContentForm = ({ onContentAdd }) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [address, setAddress] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState({});
   const navigation = useNavigation();
-  const { userId } = useContext(AuthContext); 
+  const { userId } = useContext(AuthContext);
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!contentTitle) newErrors.title = 'Title is required.';
+    if (!contentDescription) newErrors.description = 'Description is required.';
+    if (!selectedCategories.length) newErrors.categories = 'Please select at least one category.';
+    if (!contentImageUri) newErrors.image = 'Image is required.';
+    if (!address) newErrors.address = 'Address is required.';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handlePickImage = async () => {
     let result = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (result.granted === false) {
@@ -39,6 +54,8 @@ const AddContentForm = ({ onContentAdd }) => {
   };
 
   const handleAddContent = () => {
+    if (!validateForm()) return;
+
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
@@ -66,13 +83,15 @@ const AddContentForm = ({ onContentAdd }) => {
     label: category.title,
     value: category.id,
   }));
+
   if (isLoading) {
     return (
       <View>
         <LoadingOverlay message="Adding content ..." />
       </View>
-    )
+    );
   }
+
   return (
     <ScrollView style={styles.container}>
       <Card containerStyle={styles.card}>
@@ -81,6 +100,7 @@ const AddContentForm = ({ onContentAdd }) => {
           placeholder="သင်တင်ချင်တဲ. အကြောင်းအရာ"
           value={contentTitle}
           onChangeText={setContentTitle}
+          errorMessage={errors.title}
         />
 
         <Input
@@ -89,6 +109,7 @@ const AddContentForm = ({ onContentAdd }) => {
           onChangeText={setContentDescription}
           style={styles.descriptionInput}
           multiline
+          errorMessage={errors.description}
         />
         <Text style={styles.label}>မှန်ကန်စွာ ရွေးချယ်ပါ</Text>
         <Picker
@@ -99,6 +120,7 @@ const AddContentForm = ({ onContentAdd }) => {
             <Picker.Item key={item.value} label={item.label} value={item.value} style={styles.pickerItem} />
           ))}
         </Picker>
+        {errors.categories && <Text style={styles.errorText}>{errors.categories}</Text>}
         <TouchableOpacity style={styles.imagePicker} onPress={handlePickImage}>
           {contentImageUri ? (
             <Image source={{ uri: contentImageUri }} style={styles.image} />
@@ -106,12 +128,19 @@ const AddContentForm = ({ onContentAdd }) => {
             <Text>Select an Image</Text>
           )}
         </TouchableOpacity>
+        {errors.image && <Text style={styles.errorText}>{errors.image}</Text>}
         <Input
           placeholder="လိပ်စာ သိရင် ထည်.ပေးပါ"
           value={address}
           onChangeText={setAddress}
+          errorMessage={errors.address}
         />
-        <Button title="မျှဝေမယ်" buttonStyle={{ backgroundColor: '#FA6326' }} containerStyle={{ marginTop: 20 }} onPress={handleAddContent} />
+        <Button
+          title="မျှဝေမယ်"
+          buttonStyle={{ backgroundColor: '#FA6326' }}
+          containerStyle={{ marginTop: 20 }}
+          onPress={handleAddContent}
+        />
       </Card>
     </ScrollView>
   );
@@ -155,17 +184,19 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
     marginBottom: 20,
   },
-
   label: {
     margin: 10,
     fontWeight: 'bold',
     fontSize: 16,
     color: '#FA6326',
   },
-
   pickerItem: {
     fontSize: 16,
     color: '#FA6326',
+  },
+  errorText: {
+    color: 'red',
+    marginBottom: 10,
   },
 });
 
