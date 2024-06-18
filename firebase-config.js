@@ -23,7 +23,7 @@ import {
     authDomain: FIREBASE_AUTH_DOMAIN,
   };
   
-  console.log(firebaseConfig);
+  // console.log(firebaseConfig);
   
   if (getApps().length === 0) {
     initializeApp(firebaseConfig);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useContext} from 'react';
 import { StyleSheet, ScrollView, Image, TouchableOpacity, View } from 'react-native';
 import { Input, Button, Text, Card } from '@rneui/themed';
 import { Picker } from '@react-native-picker/picker';
@@ -8,15 +8,17 @@ import Content from '../../models/content';
 import { CATEGORIES } from '../../data/category';
 import { useNavigation } from '@react-navigation/native';
 import LoadingOverlay from '../ui/LoadingOverlay';
+import { AuthContext } from '../../store/auth-context';
 const AddContentForm = ({ onContentAdd }) => {
   const [contentTitle, setContentTitle] = useState('');
   const [contentImageUri, setContentImageUri] = useState('');
   const [contentImageUrl, setContentImageUrl] = useState('');
   const [contentDescription, setContentDescription] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [address, setAddress] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
-
+  const { userId } = useContext(AuthContext); 
   const handlePickImage = async () => {
     let result = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (result.granted === false) {
@@ -42,10 +44,12 @@ const AddContentForm = ({ onContentAdd }) => {
       setIsLoading(false);
       const newContent = new Content(
         uuid.v4(),
+        userId,
         selectedCategories,
         contentTitle,
         contentImageUrl,
-        contentDescription
+        contentDescription,
+        address
       );
       onContentAdd(newContent);
       setContentTitle('');
@@ -53,7 +57,7 @@ const AddContentForm = ({ onContentAdd }) => {
       setContentImageUrl(null);
       setContentDescription('');
       setSelectedCategories([]);
-
+      setAddress('');
       navigation.goBack();
     }, 2000);
   };
@@ -102,6 +106,11 @@ const AddContentForm = ({ onContentAdd }) => {
             <Text>Select an Image</Text>
           )}
         </TouchableOpacity>
+        <Input
+          placeholder="လိပ်စာ သိရင် ထည်.ပေးပါ"
+          value={address}
+          onChangeText={setAddress}
+        />
         <Button title="မျှဝေမယ်" buttonStyle={{ backgroundColor: '#FA6326' }} containerStyle={{ marginTop: 20 }} onPress={handleAddContent} />
       </Card>
     </ScrollView>

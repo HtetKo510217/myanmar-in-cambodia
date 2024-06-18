@@ -18,7 +18,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Alert } from 'react-native';
-import { fbApp } from './firebase-config';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -177,7 +176,6 @@ function AuthenticatedStack() {
 
 function Navigation() {
   const authCtx = useContext(AuthContext);
-  console.log(authCtx);
   return (
     <NavigationContainer>
       {!authCtx.isAuthenticated && <AuthStack />}
@@ -194,9 +192,10 @@ function Root() {
   useEffect(() => {
     async function fetchToken() {
       const storedToken = await AsyncStorage.getItem('token');
-
+      const storedLocalId = await AsyncStorage.getItem('localId');
       if (storedToken) {
         authCtx.authenticate(storedToken);
+        authCtx.setLocalId(storedLocalId);
       }
 
       setIsTryingLogin(false);
@@ -217,7 +216,6 @@ function Root() {
 }
 
 export default function App() {
-  console.log(fbApp)
   return (
     <>
       <StatusBar style="light" />

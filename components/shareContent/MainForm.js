@@ -18,15 +18,15 @@ const MainForm = () => {
     const uploadResp = await uploadToFirebase(uri, fileName, (v) =>
       console.log(v)
     );
-    console.log("uploadResp", uploadResp)
     const {downloadUrl} = uploadResp;
-    console.log("downloadURL", downloadUrl)
     const postData = {
       id: data.id,
+      userId: data.userId,
       categoryIds: data.categoryIds,
       title: data.title,
       description: data.description,
       imageUrl: downloadUrl,
+      address: data.address
     }
     console.log("postData", postData)
     storeData(postData);
