@@ -1,26 +1,18 @@
-import { useLayoutEffect, useState, useEffect } from 'react';
+import { useLayoutEffect, useState, useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
-import { getData } from '../util/http';
+import { PostContext } from '../store/post-context';
+import AddressText from '../components/content/AddressText';
+import EditButton from '../components/content/EditButton';
 function ContentDetailScreen({ route, navigation }) {
     const contentId = route.params.contentId;
-    const [contentData, setContentData] = useState([]);
+    const { posts } = useContext(PostContext);
     const [content, setContent] = useState(null);
-
     useEffect(() => {
-        async function fetchContent() {
-            const contents = await getData();
-            setContentData(contents);
-        }
-
-        fetchContent();
-    }, []);
-
-    useEffect(() => {
-        if (contentData.length > 0) {
-            const foundContent = contentData.find((content) => content.id === contentId);
+        if (posts.length > 0) {
+            const foundContent = posts.find((content) => content.id === contentId);
             setContent(foundContent);
         }
-    }, [contentData]);
+    }, []);
 
     useLayoutEffect(() => {
         if (content) {
@@ -46,6 +38,12 @@ function ContentDetailScreen({ route, navigation }) {
                 <Image source={{ uri: content.imageUrl }} style={styles.image} />
                 <Text style={styles.title}>{content.title}</Text>
                 <Text style={styles.description}>{content.description}</Text>
+                <View style={styles.container}>
+                    <Text style={styles.address}>Address: </Text>
+                    <AddressText address={content.address} />
+                </View>
+
+                <EditButton onPress={() => navigation.navigate('EditContent', { contentId })} id={content.userId} />
             </View>
         </ScrollView>
     );
@@ -75,4 +73,12 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
     },
+    address: {
+        fontSize: 16,
+        margin: 10,
+        color: 'white',
+        textAlign: 'center',
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+    }
 });

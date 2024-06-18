@@ -8,9 +8,11 @@ import ShareContentScreen from './screens/ShareContentScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignupScreen';
 import OnboardingScreen from './screens/OnboardingScreen';
+import EditContentScreen from './screens/EditContentScreen';
 import LoadingOverlay from './components/ui/LoadingOverlay';
 import { Ionicons } from '@expo/vector-icons';
 import AuthContextProvider, { AuthContext } from './store/auth-context';
+import PostContextProvider, { PostContext } from './store/post-context';
 import { useContext, useEffect, useState } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -147,6 +149,7 @@ function AuthStack() {
 
 function AuthenticatedStack() {
   return (
+    <PostContextProvider>
     <Stack.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: '#351401' },
@@ -170,7 +173,13 @@ function AuthenticatedStack() {
         component={ContentDetailScreen}
         options={{ title: 'Content Detail' }}
       />
+      <Stack.Screen
+        name="EditContent"
+        component={EditContentScreen}
+        options={{ title: 'Edit Content' }}
+      />
     </Stack.Navigator>
+    </PostContextProvider>
   );
 }
 
