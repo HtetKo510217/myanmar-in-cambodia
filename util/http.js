@@ -24,3 +24,17 @@ export async function getData() {
 
   return posts;
 }
+
+// update post
+export async function updateData(data) {
+  axios.put(
+    `${FIREBASE_DATABASE_URL}/posts/${data.id}.json`,
+    data
+  );
+}
+
+export async function deleteData(id) {
+  axios.delete(
+    `${FIREBASE_DATABASE_URL}/posts/${id}.json`
+  );
+}

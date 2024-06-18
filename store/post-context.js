@@ -4,7 +4,7 @@ export const PostContext = createContext({
     posts: [],
     addPost: () => {},
     setPosts: () => {},
-    deltePost: () => {},
+    deletePost: () => {},
     updatePost: () => {},
 });
 
@@ -42,8 +42,8 @@ function PostContextProvider({ children }) {
         dispatch({ type: 'DELETE', payload: id });
     }
 
-    function updatePost(post) {
-        dispatch({ type: 'UPDATE', payload: post });
+    function updatePost(id,post) {
+        dispatch({ type: 'UPDATE', payload: { id, data: post } });
     }
 
     return (

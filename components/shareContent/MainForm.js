@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState ,useContext} from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import AddContentForm from './AddContentForm';
 import { uploadToFirebase } from "../../firebase-config"
 import { storeData } from '../../util/http';
+import { PostContext } from '../../store/post-context';
+
 const MainForm = () => {
   const [contents, setContents] = useState([]);
+  const { posts, addPost } = useContext(PostContext);
 
   const handleContentAdd = (content) => {
     setContents([...contents, content]);
@@ -28,7 +31,8 @@ const MainForm = () => {
       imageUrl: downloadUrl,
       address: data.address
     }
-    console.log("postData", postData)
+    console.log("posts", posts)
+    addPost(postData);
     storeData(postData);
   };
 

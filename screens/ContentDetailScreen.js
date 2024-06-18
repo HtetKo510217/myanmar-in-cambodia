@@ -1,11 +1,13 @@
 import { useLayoutEffect, useState, useEffect, useContext } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image , Alert } from 'react-native';
 import { PostContext } from '../store/post-context';
 import AddressText from '../components/content/AddressText';
-import EditButton from '../components/content/EditButton';
+import ActionButton from '../components/content/ActionButton';
+import { deleteData } from '../util/http';
+
 function ContentDetailScreen({ route, navigation }) {
     const contentId = route.params.contentId;
-    const { posts } = useContext(PostContext);
+    const { posts, deletePost } = useContext(PostContext);
     const [content, setContent] = useState(null);
     useEffect(() => {
         if (posts.length > 0) {
@@ -23,6 +25,30 @@ function ContentDetailScreen({ route, navigation }) {
         }
     }, [navigation, content]);
 
+
+    async function deleteContent() {
+        if (content) {
+            Alert.alert(
+                'Confirm Deletion',
+                'Are you sure you want to delete this content?',
+                [
+                    {
+                        text: 'Cancel',
+                        style: 'cancel',
+                    },
+                    {
+                        text: 'Delete',
+                        onPress: async () => {
+                            deletePost(content.id);
+                            await deleteData(content.id);
+                            navigation.navigate('Home');
+                        },
+                    },
+                ],
+                { cancelable: false }
+            );
+        }
+    }
 
     if (!content) {
         return (
@@ -43,7 +69,10 @@ function ContentDetailScreen({ route, navigation }) {
                     <AddressText address={content.address} />
                 </View>
 
-                <EditButton onPress={() => navigation.navigate('EditContent', { contentId })} id={content.userId} />
+                <View >
+                    <ActionButton onPress={() => navigation.navigate('EditContent', { contentId })} userId={content.userId} type="edit" />
+                    <ActionButton onPress={deleteContent} userId={content.userId} type="delete" />
+                </View>
             </View>
         </ScrollView>
     );
