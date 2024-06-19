@@ -39,7 +39,7 @@ const OnboardingScreen = ({ navigation }) => {
                     backgroundColor: '#e9bcbe',
                     image: <Image source={require('../assets/onboarding-img3.png')} />,
                     title: 'ကမ္ဘောဒီးယား ရောက်ပီဆိုတော.',
-                    subtitle: "ကမ္ဘောဒီးယားလို နှုတ်ဆက်ရမှာပေါ. မင်္ဂလာပါ",
+                    subtitle: "ကမ္ဘောဒီးယားလို နှုတ်ဆက်ရမှာပေါ. မင်္ဂလာပါ 😁",
                     titleStyles: { fontWeight: 'bold', textAlign: 'center', color: '#3f2f25'},
                     subTitleStyles: { fontWeight: 'bold', textAlign: 'center',color: '#3f2f25'},
                 },

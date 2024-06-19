@@ -8,6 +8,10 @@ import { CATEGORIES } from '../data/category';
 function CategoriesScreen({ navigation }) {
     function renderCategoryItem(itemData) {
         function pressHandler() {
+            if(itemData.item.id === 'c7') {
+                navigation.navigate('KhmerLearning');
+                return;
+            }
             navigation.navigate('Content', {
                 categoryId : itemData.item.id
             });

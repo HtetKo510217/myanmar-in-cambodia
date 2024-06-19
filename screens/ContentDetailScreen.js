@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState, useEffect, useContext } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image , Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, Alert } from 'react-native';
 import { PostContext } from '../store/post-context';
 import AddressText from '../components/content/AddressText';
 import ActionButton from '../components/content/ActionButton';
@@ -64,10 +64,10 @@ function ContentDetailScreen({ route, navigation }) {
                 <Image source={{ uri: content.imageUrl }} style={styles.image} />
                 <Text style={styles.title}>{content.title}</Text>
                 <Text style={styles.description}>{content.description}</Text>
-                <View style={styles.container}>
+                {content.address && <View style={styles.container}>
                     <Text style={styles.address}>Address: </Text>
                     <AddressText address={content.address} />
-                </View>
+                </View>}
 
                 <View >
                     <ActionButton onPress={() => navigation.navigate('EditContent', { contentId })} userId={content.userId} type="edit" />

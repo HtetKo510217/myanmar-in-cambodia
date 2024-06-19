@@ -38,7 +38,7 @@ function EditContentScreen({ route, navigation }) {
         if (!contentDescription) newErrors.description = 'Description is required.';
         if (!selectedCategories.length) newErrors.categories = 'Please select at least one category.';
         if (!contentImageUri) newErrors.image = 'Image is required.';
-        if (!address) newErrors.address = 'Address is required.';
+        // if (!address) newErrors.address = 'Address is required.';
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -133,7 +133,7 @@ function EditContentScreen({ route, navigation }) {
                 placeholder="Address"
                 value={address}
                 onChangeText={setAddress}
-                errorMessage={errors.address}
+                // errorMessage={errors.address}
             />
             <View style={styles.btnContainer}>
                 <Button title="Update Content" onPress={handleUpdateContent} />

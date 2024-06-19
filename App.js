@@ -10,6 +10,7 @@ import SignUpScreen from './screens/SignupScreen';
 import OnboardingScreen from './screens/OnboardingScreen';
 import EditContentScreen from './screens/EditContentScreen';
 import JoinCommunityScreen from './screens/JoinCommunityScreen';
+import KhmerLearningScreen from './screens/KhmerLearningScreen';
 import LoadingOverlay from './components/ui/LoadingOverlay';
 import { Ionicons } from '@expo/vector-icons';
 import AuthContextProvider, { AuthContext } from './store/auth-context';
@@ -183,6 +184,11 @@ function AuthenticatedStack() {
         name="JoinCommunity"
         component={JoinCommunityScreen}
         options={{ title: 'Join Community' }}
+      />
+      <Stack.Screen
+        name="KhmerLearning"
+        component={KhmerLearningScreen}
+        options={{ title: 'Khmer Learning' }}
       />
     </Stack.Navigator>
     </PostContextProvider>
