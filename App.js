@@ -11,6 +11,7 @@ import OnboardingScreen from './screens/OnboardingScreen';
 import EditContentScreen from './screens/EditContentScreen';
 import JoinCommunityScreen from './screens/JoinCommunityScreen';
 import KhmerLearningScreen from './screens/KhmerLearningScreen';
+import ExchangeScreen from './screens/ExchangeScreen';
 import LoadingOverlay from './components/ui/LoadingOverlay';
 import { Ionicons } from '@expo/vector-icons';
 import AuthContextProvider, { AuthContext } from './store/auth-context';
@@ -97,6 +98,16 @@ function DrawerNavigator() {
           headerTitleStyle: { color: '#FA6326' },
           drawerIcon: ({ color, size }) => (
             <Ionicons name="share-social" color={color} size={size} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Exchange"
+        component={ExchangeScreen}
+        options={{
+          title: 'Today Exchange',
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="cash" color={color} size={size} />
           ),
         }}
       />
