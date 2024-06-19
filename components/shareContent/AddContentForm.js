@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { StyleSheet, ScrollView, Image, TouchableOpacity, View } from 'react-native';
-import { Input, Button, Text, Card } from '@rneui/themed';
+import { Input, Button, Text, Card, Icon } from '@rneui/themed';
 import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
 import uuid from 'react-native-uuid';
@@ -28,8 +28,6 @@ const AddContentForm = ({ onContentAdd }) => {
     if (!contentDescription) newErrors.description = 'Description is required.';
     if (!selectedCategories.length) newErrors.categories = 'Please select at least one category.';
     if (!contentImageUri) newErrors.image = 'Image is required.';
-    // if (!address) newErrors.address = 'Address is required.';
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -86,7 +84,7 @@ const AddContentForm = ({ onContentAdd }) => {
 
   if (isLoading) {
     return (
-      <View>
+      <View style={styles.loadingContainer}>
         <LoadingOverlay message="Adding content ..." />
       </View>
     );
@@ -101,8 +99,9 @@ const AddContentForm = ({ onContentAdd }) => {
           value={contentTitle}
           onChangeText={setContentTitle}
           errorMessage={errors.title}
+          inputStyle={styles.input}
+          containerStyle={styles.inputContainer}
         />
-
         <Input
           placeholder="အကြောင်းအရာ အသေးစိတ်"
           value={contentDescription}
@@ -110,22 +109,31 @@ const AddContentForm = ({ onContentAdd }) => {
           style={styles.descriptionInput}
           multiline
           errorMessage={errors.description}
+          inputStyle={styles.input}
+          containerStyle={styles.inputContainer}
         />
         <Text style={styles.label}>မှန်ကန်စွာ ရွေးချယ်ပါ</Text>
-        <Picker
-          selectedValue={selectedCategories}
-          onValueChange={(itemValue) => setSelectedCategories(itemValue)}
-        >
-          {categoryItems.map((item) => (
-            <Picker.Item key={item.value} label={item.label} value={item.value} style={styles.pickerItem} />
-          ))}
-        </Picker>
+        <View style={styles.pickerContainer}>
+          <Picker
+            selectedValue={selectedCategories}
+            onValueChange={(itemValue) => setSelectedCategories(itemValue)}
+            style={styles.picker}
+            itemStyle={styles.pickerItem}
+          >
+            {categoryItems.map((item) => (
+              <Picker.Item key={item.value} label={item.label} value={item.value} />
+            ))}
+          </Picker>
+        </View>
         {errors.categories && <Text style={styles.errorText}>{errors.categories}</Text>}
         <TouchableOpacity style={styles.imagePicker} onPress={handlePickImage}>
           {contentImageUri ? (
             <Image source={{ uri: contentImageUri }} style={styles.image} />
           ) : (
-            <Text>Select an Image</Text>
+            <View style={styles.imagePlaceholder}>
+              <Icon name="camera" size={36} color="#aaa" />
+              <Text>Select an Image</Text>
+            </View>
           )}
         </TouchableOpacity>
         {errors.image && <Text style={styles.errorText}>{errors.image}</Text>}
@@ -133,12 +141,13 @@ const AddContentForm = ({ onContentAdd }) => {
           placeholder="လိပ်စာ သိရင် ထည်.ပေးပါ"
           value={address}
           onChangeText={setAddress}
-          // errorMessage={errors.address}
+          inputStyle={styles.input}
+          containerStyle={styles.inputContainer}
         />
         <Button
           title="မျှဝေမယ်"
-          buttonStyle={{ backgroundColor: '#FA6326' }}
-          containerStyle={{ marginTop: 20 }}
+          buttonStyle={styles.button}
+          containerStyle={styles.buttonContainer}
           onPress={handleAddContent}
         />
       </Card>
@@ -149,34 +158,35 @@ const AddContentForm = ({ onContentAdd }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 5,
-    backgroundColor: 'lightgray',
-    paddingBottom: 100,
+    padding: 10,
+    paddingBottom: 200,
+    backgroundColor: '#f5f5f5',
   },
   card: {
     borderRadius: 10,
-    padding: 10,
-    paddingBottom: 50,
+    padding: 20,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
   },
   header: {
-    marginBottom: 15,
+    marginBottom: 20,
     textAlign: 'center',
     color: '#FA6326',
     fontWeight: 'bold',
   },
-  imagePicker: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 200,
-    backgroundColor: '#f0f0f0',
-    marginBottom: 20,
+  inputContainer: {
+    marginBottom: 10,
   },
-  image: {
-    width: '100%',
-    height: '100%',
+  input: {
+    fontSize: 16,
+    paddingHorizontal: 10,
   },
   descriptionInput: {
-    minHeight: 500,
+    minHeight: 100,
     borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 10,
@@ -185,18 +195,58 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   label: {
-    margin: 10,
+    marginVertical: 10,
     fontWeight: 'bold',
     fontSize: 16,
     color: '#FA6326',
   },
+  pickerContainer: {
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 10,
+    marginBottom: 20,
+  },
+  picker: {
+    height: 50,
+    width: '100%',
+  },
   pickerItem: {
     fontSize: 16,
+    height: 50,
     color: '#FA6326',
   },
   errorText: {
     color: 'red',
     marginBottom: 10,
+  },
+  imagePicker: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 200,
+    backgroundColor: '#f0f0f0',
+    marginBottom: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 10,
+  },
+  imagePlaceholder: {
+    alignItems: 'center',
+  },
+  button: {
+    backgroundColor: '#FA6326',
+  },
+  buttonContainer: {
+    marginTop: 20,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

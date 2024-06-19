@@ -25,27 +25,26 @@ export default function KhmerLearningScreen() {
     };
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
             <Image source={require('../assets/images/cambodia-kmer-language.jpg')} style={styles.image} />
-            <View style={styles.phraseListContainer}>
-                <FlatList
-                    data={phrases}
-                    keyExtractor={(item) => item.english}
-                    renderItem={({ item }) => (
-                        <View style={styles.phraseContainer}>
-                            <View style={styles.textContainer}>
-                                <Text style={styles.englishText}>{item.english}</Text>
-                                <Text style={styles.khmerText}>{item.khmer}</Text>
-                                <Text style={styles.burmeseText}>{item.burmese}</Text>
-                            </View>
-                            <TouchableOpacity style={styles.speakButton} onPress={() => speakPhrase(item)}>
-                                <Icon name="volume-up" size={24} color="#fff" />
-                            </TouchableOpacity>
+            <FlatList
+                data={phrases}
+                keyExtractor={(item) => item.english}
+                renderItem={({ item }) => (
+                    <View style={styles.phraseContainer}>
+                        <View style={styles.textContainer}>
+                            <Text style={styles.englishText}>{item.english}</Text>
+                            <Text style={styles.khmerText}>{item.khmer}</Text>
+                            <Text style={styles.burmeseText}>{item.burmese}</Text>
                         </View>
-                    )}
-                />
-            </View>
-        </ScrollView>
+                        <TouchableOpacity style={styles.speakButton} onPress={() => speakPhrase(item)}>
+                            <Icon name="volume-up" size={24} color="#fff" />
+                        </TouchableOpacity>
+                    </View>
+                )}
+                style={styles.phraseListContainer}
+            />
+        </View>
     );
 }
 
@@ -53,7 +52,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16,
-        backgroundColor: '#f5f5f5',
     },
     image: {
         width: '100%',
@@ -68,7 +66,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: '#f5f5f5',
         padding: 10,
         borderRadius: 10,
         marginBottom: 10,

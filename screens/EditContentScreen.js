@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, ScrollView, StyleSheet, Image, Button, TouchableOpacity } from 'react-native';
-import { Input } from '@rneui/themed';
+import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Input, Button, Icon } from '@rneui/themed';
 import { Picker } from '@react-native-picker/picker';
 import { PostContext } from '../store/post-context';
 import { CATEGORIES } from '../data/category';
@@ -38,8 +38,6 @@ function EditContentScreen({ route, navigation }) {
         if (!contentDescription) newErrors.description = 'Description is required.';
         if (!selectedCategories.length) newErrors.categories = 'Please select at least one category.';
         if (!contentImageUri) newErrors.image = 'Image is required.';
-        // if (!address) newErrors.address = 'Address is required.';
-
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -78,13 +76,12 @@ function EditContentScreen({ route, navigation }) {
 
         updatePost(content.id, updatedContent);
         await updateData(updatedContent);
-        console.log('Content updated:', posts);
         navigation.navigate('Home');
     };
 
     if (!content) {
         return (
-            <View style={styles.container}>
+            <View style={styles.loadingContainer}>
                 <Text>Loading...</Text>
             </View>
         );
@@ -98,45 +95,57 @@ function EditContentScreen({ route, navigation }) {
     return (
         <ScrollView style={styles.container}>
             <Input
-                placeholder="Content Title"
+                placeholder="သင်တင်ချင်တဲ. အကြောင်းအရာ"
                 value={contentTitle}
                 onChangeText={setContentTitle}
                 errorMessage={errors.title}
+                containerStyle={styles.inputContainer}
+                inputStyle={styles.input}
             />
             <Input
-                placeholder="Description"
+                placeholder="အကြောင်းအရာ အသေးစိတ်"
                 value={contentDescription}
                 onChangeText={setContentDescription}
                 style={styles.descriptionInput}
                 multiline
                 errorMessage={errors.description}
+                containerStyle={styles.inputContainer}
+                inputStyle={styles.input}
             />
-            <Text style={styles.label}>Choose Categories</Text>
-            <Picker
-                selectedValue={selectedCategories}
-                onValueChange={(itemValue) => setSelectedCategories(itemValue)}
-            >
-                {categoryItems.map((item) => (
-                    <Picker.Item key={item.value} label={item.label} value={item.value} style={styles.pickerItem} />
-                ))}
-            </Picker>
+            <Text style={styles.label}>မှန်ကန်စွာ ရွေးချယ်ပါ</Text>
+            <View style={styles.pickerContainer}>
+                <Picker
+                    selectedValue={selectedCategories}
+                    onValueChange={(itemValue) => setSelectedCategories(itemValue)}
+                    style={styles.picker}
+                    itemStyle={styles.pickerItem}
+                >
+                    {categoryItems.map((item) => (
+                        <Picker.Item key={item.value} label={item.label} value={item.value} />
+                    ))}
+                </Picker>
+            </View>
             {errors.categories && <Text style={styles.errorText}>{errors.categories}</Text>}
             <TouchableOpacity style={styles.imagePicker} onPress={handlePickImage}>
                 {contentImageUri ? (
                     <Image source={{ uri: contentImageUri }} style={styles.image} />
                 ) : (
-                    <Text>Select an Image</Text>
+                    <View style={styles.imagePlaceholder}>
+                        <Icon name="camera" size={36} color="#aaa" />
+                        <Text>Select an Image</Text>
+                    </View>
                 )}
             </TouchableOpacity>
             {errors.image && <Text style={styles.errorText}>{errors.image}</Text>}
             <Input
-                placeholder="Address"
+                placeholder="လိပ်စာ သိရင် ထည်.ပေးပါ"
                 value={address}
                 onChangeText={setAddress}
-                // errorMessage={errors.address}
+                inputStyle={styles.input}
+                containerStyle={styles.inputContainer}
             />
             <View style={styles.btnContainer}>
-                <Button title="Update Content" onPress={handleUpdateContent} />
+                <Button title="Update Content" onPress={handleUpdateContent} buttonStyle={styles.button} />
             </View>
         </ScrollView>
     );
@@ -149,6 +158,18 @@ const styles = StyleSheet.create({
         backgroundColor: '#f0f0f0',
         paddingBottom: 20,
     },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    inputContainer: {
+        marginBottom: 10,
+    },
+    input: {
+        fontSize: 16,
+        paddingHorizontal: 10,
+    },
     descriptionInput: {
         minHeight: 100,
         borderColor: '#ccc',
@@ -159,12 +180,29 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     label: {
-        margin: 10,
+        marginVertical: 10,
         fontWeight: 'bold',
         fontSize: 16,
+        color: '#FA6326',
+    },
+    pickerContainer: {
+        borderColor: '#ccc',
+        borderWidth: 1,
+        borderRadius: 10,
+        marginBottom: 20,
+    },
+    picker: {
+        height: 50,
+        width: '100%',
     },
     pickerItem: {
         fontSize: 16,
+        height: 50,
+        color: '#FA6326',
+    },
+    errorText: {
+        color: 'red',
+        marginBottom: 10,
     },
     imagePicker: {
         alignItems: 'center',
@@ -172,10 +210,17 @@ const styles = StyleSheet.create({
         height: 200,
         backgroundColor: '#f0f0f0',
         marginBottom: 20,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#ccc',
     },
     image: {
         width: '100%',
         height: '100%',
+        borderRadius: 10,
+    },
+    imagePlaceholder: {
+        alignItems: 'center',
     },
     btnContainer: {
         flexDirection: 'row',
@@ -184,9 +229,8 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 100,
     },
-    errorText: {
-        color: 'red',
-        marginBottom: 10,
+    button: {
+        backgroundColor: '#FA6326',
     },
 });
 
