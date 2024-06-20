@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FIREBASE_DATABASE_URL } from 'react-native-dotenv';
+const FIREBASE_DATABASE_URL = process.env.EXPO_PUBLIC_FIREBASE_DATABASE_URL;
 export function storeData(data) {
   axios.post(
     `${FIREBASE_DATABASE_URL}/posts.json`,

@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { FIREBASE_API_KEY } from 'react-native-dotenv';
 
-const API_KEY = FIREBASE_API_KEY
+const API_KEY = process.env.EXPO_PUBLIC_FIREBASE_API_KEY
 
 async function authenticate(mode, email, password) {
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:${mode}?key=${API_KEY}`;

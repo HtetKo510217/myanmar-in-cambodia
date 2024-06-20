@@ -1,10 +1,3 @@
-import {
-    FIREBASE_API_KEY,
-    FIREBASE_STORAGE_BUCKET,
-    FIREBASE_APP_ID,
-    FIREBASE_PROJECT_ID,
-    FIREBASE_AUTH_DOMAIN,
-  } from "react-native-dotenv";
   import { initializeApp, getApp, getApps } from "firebase/app";
   import {
     getStorage,
@@ -16,11 +9,11 @@ import {
   
   // Initialize Firebase
   const firebaseConfig = {
-    apiKey: FIREBASE_API_KEY,
-    storageBucket: FIREBASE_STORAGE_BUCKET,
-    appId: FIREBASE_APP_ID,
-    projectId: FIREBASE_PROJECT_ID,
-    authDomain: FIREBASE_AUTH_DOMAIN,
+    apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+    storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
+    projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
+    authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
   };
   
   // console.log(firebaseConfig);
