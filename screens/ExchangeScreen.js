@@ -80,12 +80,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
-    color: '#FA6326',
+    color: '#6A5AE0',
   },
   card: {
     borderRadius: 10,
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#6A5AE0',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -97,11 +97,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: '#fff',
     marginBottom: 10,
   },
   rateText: {
     fontSize: 16,
     textAlign: 'center',
+    color: '#fff',
   },
   btnContainer: {
     flexDirection: 'row',
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    backgroundColor: '#FA6326',
+    backgroundColor: '#6A5AE0',
   },
   loadingContainer: {
     flex: 1,

@@ -4,20 +4,20 @@ import * as Speech from 'expo-speech';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const phrases = [
-    { khmer: "សួស្ដី", burmese: "မင်္ဂလာပါ", english: "Hello", say: 'suosdei' },
-    { khmer: "សូមអរគុណ", burmese: "ကျေးဇူးတင်ပါတယ်", english: "Thank you", say: ' arkoun' },
-    { khmer: "ជំរាបលា", burmese: "သွားတော့မယ်", english: "Goodbye", say: 'chomreab lea' },
-    { khmer: "បាទ/ចាស", burmese: "ဟုတ်ကဲ့", english: "Yes", say: 'bat' },
-    { khmer: "ទេ", burmese: "မဟုတ်ဘူး", english: "No", say: 'te' },
-    { khmer: "សូមទោស", burmese: "ဆောရီး", english: "Sorry", say: 'saumtos' },
-    { khmer: "ចង់បាន", burmese: "လိုချင်တယ်", english: "Want", say: 'chngban' },
-    { khmer: "ធ្វើដំណើរ", burmese: "ခရီးသွား", english: "Travel", say: 'thveudamnaer' },
-    { khmer: "ល្អ", burmese: "ကောင်းတယ်", english: "Good", say: 'l' },
-    { khmer: "មិនល្អ", burmese: "မကောင်းဘူး", english: "Bad", say: 'minol' },
+    { khmer: "សួស្ដី", burmese: "မင်္ဂလာပါ", english: "Hello", pronounce: "soom srdei" },
+    { khmer: "សូមអរគុណ", burmese: "ကျေးဇူးတင်ပါတယ်", english: "Thank you", pronounce: "saum arkoun" },
+    { khmer: "ជំរាបលា", burmese: "သွားတော့မယ်", english: "Goodbye", pronounce: "jom-reab-lear" },
+    { khmer: "បាទ/ចាស", burmese: "ဟုတ်ကဲ့", english: "Yes", pronounce: "baht/cha" },
+    { khmer: "ទេ", burmese: "မဟုတ်ဘူး", english: "No", pronounce: "te" },
+    { khmer: "សូមទោស", burmese: "ဆောရီး", english: "Sorry", pronounce: "soum toh" },
+    { khmer: "ចង់បាន", burmese: "လိုချင်တယ်", english: "Want", pronounce: "jong ban" },
+    { khmer: "ធ្វើដំណើរ", burmese: "ခရီးသွား", english: "Travel", pronounce: "twer dom-nao" },
+    { khmer: "ល្អ", burmese: "ကောင်းတယ်", english: "Good", pronounce: "lah" },
+    { khmer: "មិនល្អ", burmese: "မကောင်းဘူး", english: "Bad", pronounce: "min lah" }
 ];
 
 export default function KhmerLearningScreen() {
-    const [language, setLanguage] = useState('say');
+    const [language, setLanguage] = useState('pronounce');
 
     const speakPhrase = (phrase) => {
         const text = phrase[language];
