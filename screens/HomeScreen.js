@@ -5,7 +5,7 @@ import Button from '../components/home/Button';
 function HomeScreen({ navigation }) {
     function pressHandler() {
         navigation.navigate('Content', {
-            categoryId : 'c9'
+            categoryId : 'c10'
         });
     }
     return (

@@ -6,6 +6,7 @@ import HomeScreen from '../../screens/HomeScreen';
 import CategoriesScreen from '../../screens/CategoriesScreen';
 import ShareContentScreen from '../../screens/ShareContentScreen';
 import ExchangeScreen from '../../screens/ExchangeScreen';
+import MyanmarEmbassy from '../../screens/MyanmarEmbassy';
 import { AuthContext } from '../../store/auth-context';
 
 const Drawer = createDrawerNavigator();
@@ -91,6 +92,16 @@ function DrawerNavigator() {
                     title: 'Today Exchange Rate',
                     drawerIcon: ({ color, size }) => (
                         <Ionicons name="cash" color={color} size={size} />
+                    ),
+                }}
+            />
+            <Drawer.Screen
+                name="Myanmar Embassy"
+                component={MyanmarEmbassy}
+                options={{
+                    title: 'Myanmar Embassy',
+                    drawerIcon: ({ color, size }) => (
+                        <Ionicons name="flag" color={color} size={size} />
                     ),
                 }}
             />

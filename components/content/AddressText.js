@@ -7,14 +7,14 @@ const AddressText = ({ address }) => {
     if (isLink) {
         return (
             <Text
-                style={styles.address}
+                style={[styles.address, { textDecorationLine: 'underline' }]}
                 onPress={() => Linking.openURL(address)}
             >
                 {address}
             </Text>
         );
     } else {
-        return <Text>{address}</Text>;
+        return <Text style={styles.address}>{address}</Text>;
     }
 };
 
@@ -28,6 +28,5 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontStyle: 'italic',
         fontWeight: 'bold',
-        textDecorationLine: 'underline',
     },
 })
