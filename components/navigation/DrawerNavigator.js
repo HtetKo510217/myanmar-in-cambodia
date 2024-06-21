@@ -7,6 +7,7 @@ import CategoriesScreen from '../../screens/CategoriesScreen';
 import ShareContentScreen from '../../screens/ShareContentScreen';
 import ExchangeScreen from '../../screens/ExchangeScreen';
 import MyanmarEmbassy from '../../screens/MyanmarEmbassy';
+import AboutMeScreen from '../../screens/AboutMeScreen';
 import { AuthContext } from '../../store/auth-context';
 
 const Drawer = createDrawerNavigator();
@@ -102,6 +103,16 @@ function DrawerNavigator() {
                     title: 'Myanmar Embassy',
                     drawerIcon: ({ color, size }) => (
                         <Ionicons name="flag" color={color} size={size} />
+                    ),
+                }}
+            />
+            <Drawer.Screen
+                name="About Me"
+                component={AboutMeScreen}
+                options={{
+                    title: 'About Me',
+                    drawerIcon: ({ color, size }) => (
+                        <Ionicons name="information-circle" color={color} size={size} />
                     ),
                 }}
             />
