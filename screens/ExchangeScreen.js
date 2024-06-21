@@ -43,9 +43,15 @@ const ExchangeScreen = () => {
 
   const renderItem = ({ item }) => (
     <Card containerStyle={styles.card}>
-      <Text style={styles.currencyText}>{item.currency}</Text>
-      <Text style={styles.rateText}>Buy: {item.buy}</Text>
-      <Text style={styles.rateText}>Sell: {item.sell}</Text>
+      <Text style={styles.currencyText}>1 {item.currency}</Text>
+      <View style={styles.rateContainer}>
+        <Text style={styles.rateLabel}>Buy:</Text>
+        <Text style={styles.rateValue}>{item.buy} MMK</Text>
+      </View>
+      <View style={styles.rateContainer}>
+        <Text style={styles.rateLabel}>Sell:</Text>
+        <Text style={styles.rateValue}>{item.sell} MMK</Text>
+      </View>
     </Card>
   );
 
@@ -73,19 +79,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#f5f5f5',
+    // backgroundColor: '#713045',
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
-    color: '#6A5AE0',
+    color: '#000',
   },
   card: {
     borderRadius: 10,
     padding: 20,
-    backgroundColor: '#6A5AE0',
+    backgroundColor: '#7d7c84',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -100,9 +106,17 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginBottom: 10,
   },
-  rateText: {
+  rateContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 5,
+  },
+  rateLabel: {
     fontSize: 16,
-    textAlign: 'center',
+    color: '#fff',
+  },
+  rateValue: {
+    fontSize: 16,
     color: '#fff',
   },
   btnContainer: {
@@ -112,7 +126,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    backgroundColor: '#6A5AE0',
+    backgroundColor: '#7d7c84',
   },
   loadingContainer: {
     flex: 1,
@@ -121,6 +135,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: 'red',
+    fontSize: 16,
   },
   list: {
     paddingBottom: 20,

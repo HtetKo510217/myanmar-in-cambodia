@@ -37,7 +37,7 @@ function AboutMeScreen() {
 
             <View style={styles.qrContainer}>
                 <View style={styles.qrItem}>
-                    <Icon name='coffee' size={48} color='#333' />
+                    <Icon name='coffee' size={48} color='#FA6326' />
                     <Text style={styles.qrText}>Buy Me A Coffee</Text>
                 </View>
                 <Image

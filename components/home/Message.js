@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     },
     message: {
         fontSize: 16,
-        color: 'white',
+        color: '#000',
         textAlign: 'center',
     }
 })

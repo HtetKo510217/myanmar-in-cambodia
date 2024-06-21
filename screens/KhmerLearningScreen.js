@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#c94e4e',
         padding: 10,
         borderRadius: 10,
         marginBottom: 10,
@@ -83,15 +83,16 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 4,
+        color: '#fff',
     },
     khmerText: {
         fontSize: 16,
-        color: '#555',
+        color: '#fff',
         marginBottom: 4,
     },
     burmeseText: {
         fontSize: 16,
-        color: '#555',
+        color: '#fff',
     },
     speakButton: {
         backgroundColor: '#007AFF',

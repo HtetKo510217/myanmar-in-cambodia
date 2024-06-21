@@ -18,10 +18,10 @@ function DrawerNavigator() {
     return (
         <Drawer.Navigator
             screenOptions={{
-                headerStyle: { backgroundColor: '#351401' },
+                headerStyle: { backgroundColor: '#f5693a' },
                 headerTintColor: 'white',
-                sceneContainerStyle: { backgroundColor: '#3f2f25' },
-                drawerContentStyle: { backgroundColor: '#351401' },
+                sceneContainerStyle: { backgroundColor: '#fff' },
+                drawerContentStyle: { backgroundColor: '#f5693a' },
                 drawerInactiveTintColor: 'white',
                 drawerActiveTintColor: '#351401',
                 drawerActiveBackgroundColor: '#e4baa1',
@@ -39,7 +39,7 @@ function DrawerNavigator() {
                         <Ionicons
                             name="exit"
                             size={24}
-                            color="#FA6326"
+                            color="#fff"
                             style={{ marginRight: 15 }}
                             onPress={() => {
                                 Alert.alert(

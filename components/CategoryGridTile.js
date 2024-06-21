@@ -13,7 +13,7 @@ function CategoryGridTile({ title, color, icon, onPress }) {
         onPress={onPress}
       >
         <View style={[styles.innerContainer, { backgroundColor: color }]}>
-          <Ionicons name={icon} size={26} color="white"  />
+          <Ionicons name={icon} size={26} color="black"  />
           <Text style={styles.title}>{title}</Text>
         </View>
       </Pressable>
@@ -31,9 +31,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     elevation: 4,
     backgroundColor: 'white',
-    shadowColor: 'black',
-    shadowOpacity: 0.25,
-    shadowOffset: { width: 0, height: 2 },
+    // shadowColor: 'black',
+    // shadowOpacity: 0.25,
+    // shadowOffset: { width: 0, height: 2 },
     shadowRadius: 8,
     overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
   },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView ,Linking, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 function MyanmarEmbassy() {
@@ -26,13 +26,14 @@ function MyanmarEmbassy() {
                 <Icon name='email' size={24} color='#000' />
                 <Text style={styles.infoText}>mephnompenh@yahoo.com</Text>
             </View>
-            <View style={styles.infoContainer}>
+            <TouchableOpacity style={styles.infoContainer} onPress={() => Linking.openURL('https://www.mephnompenh.org/')}>
                 <Icon name='language' size={24} color='#000' />
-                <Text style={styles.infoText}>www.mephnompenh.org</Text>
+                <Text style={[styles.infoText, { textDecorationLine: 'underline' }]}>www.mephnompenh.org</Text>
+            </TouchableOpacity>
+            <View style={styles.officeHours}>
+                <Text style={styles.infoText}>Office Hours:</Text>
+                <Text style={styles.infoText}>Monday - Friday: 9:00 AM - 5:00 PM</Text>
             </View>
-            <Text style={styles.officeHours}>
-                Office Hours: 09:00 am to 16:30 pm (Monday to Friday)
-            </Text>
         </ScrollView>
     );
 }
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
     },
     infoText: {
-        marginLeft: 8,
+        marginLeft: 15,
         fontSize: 16,
         color: '#555',
     },

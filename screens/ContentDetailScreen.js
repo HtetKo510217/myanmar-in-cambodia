@@ -20,7 +20,7 @@ function ContentDetailScreen({ route, navigation }) {
         if (content) {
             navigation.setOptions({
                 title: content.title,
-                headerTitleStyle: { color: '#FA6326' },
+                headerTitleStyle: { color: '#fff' },
             });
         }
     }, [navigation, content]);
@@ -99,13 +99,13 @@ const styles = StyleSheet.create({
     description: {
         fontSize: 16,
         margin: 10,
-        color: 'white',
+        color: '#000',
         textAlign: 'center',
     },
     address: {
         fontSize: 16,
         margin: 10,
-        color: 'white',
+        color: '#000',
         textAlign: 'center',
         fontStyle: 'italic',
         fontWeight: 'bold',
