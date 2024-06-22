@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   header: {
     marginBottom: 20,
     textAlign: 'center',
-    color: '#FA6326',
+    color: '#FFC30B',
     fontWeight: 'bold',
   },
   inputContainer: {
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontWeight: 'bold',
     fontSize: 16,
-    color: '#FA6326',
+    color: '#000',
   },
   pickerContainer: {
     borderColor: '#ccc',
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
   pickerItem: {
     fontSize: 16,
     height: 50,
-    color: '#FA6326',
+    color: '#000',
   },
   errorText: {
     color: 'red',
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: '#FA6326',
+    backgroundColor: '#FFC30B',
   },
   buttonContainer: {
     marginTop: 20,

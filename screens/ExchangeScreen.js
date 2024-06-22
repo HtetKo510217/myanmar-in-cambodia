@@ -69,6 +69,7 @@ const ExchangeScreen = () => {
           title="Refresh Rates"
           onPress={fetchRates}
           buttonStyle={styles.button}
+          titleStyle={styles.buttonTitle}
         />
       </View>
     </View>
@@ -79,31 +80,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    // backgroundColor: '#713045',
+    backgroundColor: '#f5f5f5',
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
-    color: '#000',
+    color: '#333',
   },
   card: {
     borderRadius: 10,
-    padding: 20,
-    backgroundColor: '#7d7c84',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 3,
+    // padding: 20,
+    backgroundColor: 'rgba(255, 195, 11, 0.5)',
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 5,
+    // elevation: 3,
     marginBottom: 10,
   },
   currencyText: {
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#fff',
+    color: '#000',
     marginBottom: 10,
   },
   rateContainer: {
@@ -113,11 +114,11 @@ const styles = StyleSheet.create({
   },
   rateLabel: {
     fontSize: 16,
-    color: '#fff',
+    color: '#000',
   },
   rateValue: {
     fontSize: 16,
-    color: '#fff',
+    color: '#000',
   },
   btnContainer: {
     flexDirection: 'row',
@@ -126,7 +127,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    backgroundColor: '#7d7c84',
+    backgroundColor: '#000',
+    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  buttonTitle: {
+    fontSize: 16,
+    color: '#fff',
   },
   loadingContainer: {
     flex: 1,

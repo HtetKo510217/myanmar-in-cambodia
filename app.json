@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "myanmar-in-cambodia",
-    "slug": "myanmar-in-cambodia",
+    "name": "KhmerGuide",
+    "slug": "khmerguide",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,7 +14,7 @@
     "ios": {
       "buildNumber": "1.0.0",
       "supportsTablet": true,
-      "bundleIdentifier": "com.htetko.myanmarincambodia"
+      "bundleIdentifier": "com.htetko.khmerguide"
     },
     "android": {
       "versionCode": 1,
@@ -25,7 +25,7 @@
       "permissions": [
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.htetko.myanmarincambodia"
+      "package": "com.htetko.khmerguide"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -41,7 +41,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "641361cf-5d8f-42f8-890e-eacbd08bfe29"
+        "projectId": "a1965db6-c3e7-4cf6-9f76-0c8e09419fd9"
       }
     }
   }

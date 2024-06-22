@@ -34,7 +34,7 @@ function AuthStack() {
         <Stack.Navigator
             initialRouteName={routeName}
             screenOptions={{
-                headerStyle: { backgroundColor: '#f5693a' },
+                headerStyle: { backgroundColor: '#FFC30B' },
                 headerTintColor: 'white',
                 contentStyle: { backgroundColor: '#fff' },
                 headerBackTitle: 'Back',

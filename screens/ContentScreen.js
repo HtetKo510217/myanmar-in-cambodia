@@ -4,10 +4,11 @@ import ContentItem from '../components/content/ContentItem';
 import { CATEGORIES } from '../data/category';
 import { PostContext } from '../store/post-context';
 import { getData } from '../util/http';
+
 function ContentScreen({ route, navigation }) {
     const { posts, setPosts } = useContext(PostContext);
     const catId = route.params.categoryId;
-    const displayContent = posts.filter((content) => content.categoryIds.indexOf(catId) >= 0);
+    const displayContent = posts.filter((content) => content.categoryIds === catId);
 
     useEffect(() => {
         async function fetchContent() {
@@ -22,7 +23,6 @@ function ContentScreen({ route, navigation }) {
         const categoryTitle = CATEGORIES.find((category) => category.id === catId).title;
         navigation.setOptions({ title: categoryTitle, headerTitleStyle: { color: '#fff' } });
     }, [catId, navigation]);
-
 
     const renderContentItem = ({ item }) => {
         return (
@@ -40,6 +40,9 @@ function ContentScreen({ route, navigation }) {
                 data={displayContent}
                 keyExtractor={(item) => item.id}
                 renderItem={renderContentItem}
+                numColumns={2}
+                columnWrapperStyle={styles.row}
+                contentContainerStyle={styles.listContainer}
             />
         </View>
     );
@@ -50,6 +53,13 @@ export default ContentScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
+        padding: 10,
+    },
+    row: {
+        flex: 1,
+        justifyContent: 'space-between',
+    },
+    listContainer: {
+        paddingBottom: 10,
     },
 });

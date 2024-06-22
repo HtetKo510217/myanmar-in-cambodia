@@ -18,13 +18,14 @@ function DrawerNavigator() {
     return (
         <Drawer.Navigator
             screenOptions={{
-                headerStyle: { backgroundColor: '#f5693a' },
+                headerStyle: { backgroundColor: '#FFC30B' },
+
                 headerTintColor: 'white',
                 sceneContainerStyle: { backgroundColor: '#fff' },
-                drawerContentStyle: { backgroundColor: '#f5693a' },
-                drawerInactiveTintColor: 'white',
+                drawerContentStyle: { backgroundColor: '#fff' },
+                drawerInactiveTintColor: 'black',
                 drawerActiveTintColor: '#351401',
-                drawerActiveBackgroundColor: '#e4baa1',
+                drawerActiveBackgroundColor: '#FFC30B',
             }}
         >
             <Drawer.Screen
@@ -80,7 +81,7 @@ function DrawerNavigator() {
                 component={ShareContentScreen}
                 options={{
                     title: 'Share Content',
-                    headerTitleStyle: { color: '#FA6326' },
+                    headerTitleStyle: { color: '#fff' },
                     drawerIcon: ({ color, size }) => (
                         <Ionicons name="share-social" color={color} size={size} />
                     ),
