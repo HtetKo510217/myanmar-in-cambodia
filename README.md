@@ -37,6 +37,10 @@ Your feedback is valuable to us! If you have any suggestions, feature requests, 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Screenshots
+
 ![Screenshot 1](assets/images/readme/screenshot1.jpg)
-![Screenshot 1](assets/images/readme/screenshot2.jpg)
-![Screenshot 1](assets/images/readme/screenshot3.jpg)
+
+![Screenshot 2](assets/images/readme/screenshot2.jpg)
+
+![Screenshot 3](assets/images/readme/screenshot3.jpg)
+
