@@ -39,8 +39,8 @@ function DrawerNavigator() {
                     headerRight: () => (
                         <Ionicons
                             name="exit"
-                            size={24}
-                            color="#fff"
+                            size={25}
+                            color="#351401"
                             style={{ marginRight: 15 }}
                             onPress={() => {
                                 Alert.alert(
@@ -61,7 +61,6 @@ function DrawerNavigator() {
                                     { cancelable: false }
                                 );
                             }}
-                            title="Logout"
                         />
                     ),
                 }}
