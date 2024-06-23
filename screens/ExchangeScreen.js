@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const ExchangeScreen = () => {
   const [rates, setRates] = useState([]);
+  const [date, setDate] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -14,6 +15,7 @@ const ExchangeScreen = () => {
     try {
       const response = await axios.get('https://myanmar-currency-api.github.io/api/latest.json');
       setRates(response.data.data);
+      setDate(response.data.timestamp);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -58,6 +60,7 @@ const ExchangeScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Exchange Rates in Myanmar</Text>
+      <Text style={styles.date}>Last Updated: {date}</Text>
       <FlatList
         data={rates}
         renderItem={renderItem}
@@ -85,6 +88,12 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 24,
     fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+    color: '#333',
+  },
+  date: {
+    fontSize: 16,
     textAlign: 'center',
     marginBottom: 20,
     color: '#333',

@@ -120,7 +120,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         margin: 10,
         color: '#000',
-        textAlign: 'center',
     },
     address: {
         fontSize: 16,
