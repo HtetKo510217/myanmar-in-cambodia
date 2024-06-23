@@ -1,20 +1,32 @@
-import { useLayoutEffect, useState, useEffect, useContext } from 'react';
+import { useLayoutEffect, useState, useEffect, useContext, useCallback } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, Alert } from 'react-native';
 import { PostContext } from '../store/post-context';
 import AddressText from '../components/content/AddressText';
 import ActionButton from '../components/content/ActionButton';
 import { deleteData } from '../util/http';
+import Toast from 'react-native-root-toast';
+import { useFocusEffect } from '@react-navigation/native';
 
 function ContentDetailScreen({ route, navigation }) {
     const contentId = route.params.contentId;
     const { posts, deletePost } = useContext(PostContext);
     const [content, setContent] = useState(null);
-    useEffect(() => {
+    const fetchContent = () => {
         if (posts.length > 0) {
             const foundContent = posts.find((content) => content.id === contentId);
             setContent(foundContent);
         }
-    }, []);
+    };
+
+    useEffect(() => {
+        fetchContent();
+    }, [posts]);
+
+    useFocusEffect(
+        useCallback(() => {
+            fetchContent();
+        }, [posts])
+    );
 
     useLayoutEffect(() => {
         if (content) {
@@ -41,7 +53,14 @@ function ContentDetailScreen({ route, navigation }) {
                         onPress: async () => {
                             deletePost(content.id);
                             await deleteData(content.id);
-                            navigation.navigate('Home');
+                            Toast.show('Content deleted successfully!', {
+                                duration: Toast.durations.SHORT,
+                                position: Toast.positions.BOTTOM,
+                                shadow: true,
+                                animation: true,
+                                hideOnPress: true,
+                            });
+                            navigation.goBack();
                         },
                     },
                 ],

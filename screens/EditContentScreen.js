@@ -6,6 +6,7 @@ import { PostContext } from '../store/post-context';
 import { CATEGORIES } from '../data/category';
 import * as ImagePicker from 'expo-image-picker';
 import { updateData } from '../util/http';
+import Toast from 'react-native-root-toast';
 
 function EditContentScreen({ route, navigation }) {
     const { contentId } = route.params;
@@ -30,7 +31,7 @@ function EditContentScreen({ route, navigation }) {
             setContentImageUri(foundContent.imageUrl);
             setContentImageUrl({ uri: foundContent.imageUrl });
         }
-    }, [contentId, posts]);
+    }, []);
 
     const validateForm = () => {
         const newErrors = {};
@@ -76,7 +77,14 @@ function EditContentScreen({ route, navigation }) {
 
         updatePost(content.id, updatedContent);
         await updateData(updatedContent);
-        navigation.navigate('Home');
+        Toast.show('Content updated successfully!', {
+            duration: Toast.durations.SHORT,
+            position: Toast.positions.BOTTOM,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+        });
+        navigation.goBack();
     };
 
     if (!content) {
@@ -137,13 +145,15 @@ function EditContentScreen({ route, navigation }) {
                 )}
             </TouchableOpacity>
             {errors.image && <Text style={styles.errorText}>{errors.image}</Text>}
-            <Input
-                placeholder="လိပ်စာ သိရင် ထည်.ပေးပါ"
-                value={address}
-                onChangeText={setAddress}
-                inputStyle={styles.input}
-                containerStyle={styles.inputContainer}
-            />
+            <View style={styles.inputWrapper}>
+                <Input
+                    placeholder="လိပ်စာ သိရင် ထည်.ပေးပါ"
+                    value={address}
+                    onChangeText={setAddress}
+                    inputStyle={styles.input}
+                    containerStyle={styles.inputContainer}
+                />
+            </View>
             <View style={styles.btnContainer}>
                 <Button title="Update Content" onPress={handleUpdateContent} buttonStyle={styles.button} />
             </View>
@@ -162,6 +172,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    inputWrapper: {
+        paddingBottom: 100,
     },
     inputContainer: {
         marginBottom: 10,

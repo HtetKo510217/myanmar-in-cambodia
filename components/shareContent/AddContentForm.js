@@ -9,6 +9,7 @@ import { CATEGORIES } from '../../data/category';
 import { useNavigation } from '@react-navigation/native';
 import LoadingOverlay from '../ui/LoadingOverlay';
 import { AuthContext } from '../../store/auth-context';
+import Toast from 'react-native-root-toast';
 
 const AddContentForm = ({ onContentAdd }) => {
   const [contentTitle, setContentTitle] = useState('');
@@ -73,6 +74,13 @@ const AddContentForm = ({ onContentAdd }) => {
       setContentDescription('');
       setSelectedCategories([]);
       setAddress('');
+      Toast.show('Content added successfully!', {
+        duration: Toast.durations.SHORT,
+        position: Toast.positions.BOTTOM,
+        shadow: true,
+        animation: true,
+        hideOnPress: true,
+      });
       navigation.goBack();
     }, 2000);
   };
@@ -245,6 +253,7 @@ const styles = StyleSheet.create({
   },
   loadingContainer: {
     flex: 1,
+    height: 550,
     justifyContent: 'center',
     alignItems: 'center',
   },

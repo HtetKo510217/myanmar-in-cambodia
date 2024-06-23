@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthStack from './components/navigation/AuthStack';
 import AuthenticatedStack from './components/navigation/AuthenticatedStack';
+import { RootSiblingParent } from 'react-native-root-siblings';
 
 function Navigation() {
   const authCtx = useContext(AuthContext);
@@ -54,7 +55,9 @@ export default function App() {
     <>
       <StatusBar style="light" />
       <AuthContextProvider>
-        <Root />
+        <RootSiblingParent>
+          <Root />
+        </RootSiblingParent>
       </AuthContextProvider>
     </>
   );

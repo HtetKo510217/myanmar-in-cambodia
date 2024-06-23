@@ -1,23 +1,30 @@
-import React, { useEffect, useState, useLayoutEffect, useContext } from 'react';
+import React, { useEffect, useLayoutEffect, useContext, useCallback } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import ContentItem from '../components/content/ContentItem';
 import { CATEGORIES } from '../data/category';
 import { PostContext } from '../store/post-context';
 import { getData } from '../util/http';
+import { useFocusEffect } from '@react-navigation/native';
 
 function ContentScreen({ route, navigation }) {
     const { posts, setPosts } = useContext(PostContext);
     const catId = route.params.categoryId;
-    const displayContent = posts.filter((content) => content.categoryIds === catId);
+    const displayContent = posts.filter((content) => content.categoryIds.includes(catId));
+
+    const fetchContent = useCallback(async () => {
+        const contents = await getData();
+        setPosts(contents);
+    }, [setPosts]);
 
     useEffect(() => {
-        async function fetchContent() {
-            const contents = await getData();
-            setPosts(contents);
-        }
-
         fetchContent();
-    }, []);
+    }, [fetchContent]);
+
+    useFocusEffect(
+        useCallback(() => {
+            fetchContent();
+        }, [fetchContent])
+    );
 
     useLayoutEffect(() => {
         const categoryTitle = CATEGORIES.find((category) => category.id === catId).title;
