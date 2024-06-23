@@ -38,9 +38,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Screenshots
 
-![Screenshot 1](assets/images/readme/screenshot1.jpg)
-
-![Screenshot 2](assets/images/readme/screenshot2.jpg)
-
-![Screenshot 3](assets/images/readme/screenshot3.jpg)
+<img src="assets/images/readme/screenshot1.jpg" alt="Screenshot 1" width="400">
+<img src="assets/images/readme/screenshot2.jpg" alt="Screenshot 1" width="400">
+<img src="assets/images/readme/screenshot3.jpg" alt="Screenshot 1" width="400">
 
