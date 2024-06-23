@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         padding: 16,
         backgroundColor: '#fff',
         alignItems: 'center',
-        marginTop: 50,
+        paddingTop: 80,
     },
     headerContainer: {
         alignItems: 'center',

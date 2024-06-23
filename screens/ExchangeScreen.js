@@ -91,13 +91,7 @@ const styles = StyleSheet.create({
   },
   card: {
     borderRadius: 10,
-    // padding: 20,
-    backgroundColor: 'rgba(255, 195, 11, 0.5)',
-    // shadowColor: '#000',
-    // shadowOffset: { width: 0, height: 2 },
-    // shadowOpacity: 0.1,
-    // shadowRadius: 5,
-    // elevation: 3,
+    backgroundColor: '#FFC30B',
     marginBottom: 10,
   },
   currencyText: {
@@ -115,10 +109,12 @@ const styles = StyleSheet.create({
   rateLabel: {
     fontSize: 16,
     color: '#000',
+    fontWeight: 'bold',
   },
   rateValue: {
     fontSize: 16,
     color: '#000',
+    fontWeight: 'bold',
   },
   btnContainer: {
     flexDirection: 'row',

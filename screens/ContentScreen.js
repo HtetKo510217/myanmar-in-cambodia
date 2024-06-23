@@ -9,7 +9,7 @@ import { useFocusEffect } from '@react-navigation/native';
 function ContentScreen({ route, navigation }) {
     const { posts, setPosts } = useContext(PostContext);
     const catId = route.params.categoryId;
-    const displayContent = posts.filter((content) => content.categoryIds.includes(catId));
+    const displayContent = posts.filter((content) => content.categoryIds === catId);
 
     const fetchContent = useCallback(async () => {
         const contents = await getData();

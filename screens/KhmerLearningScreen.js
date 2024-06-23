@@ -1,8 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import * as Speech from 'expo-speech';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import learningData from '../data/khmerPhrases.json';
+
+const PhraseItem = memo(({ phrase, language, speakPhrase }) => (
+    <View style={styles.phraseContainer}>
+        <View style={styles.textContainer}>
+            <Text style={styles.englishText}>{phrase.english}</Text>
+            <Text style={styles.khmerText}>{phrase.khmer}</Text>
+            <Text style={styles.burmeseText}>{phrase.burmese}</Text>
+            <Text style={styles.pronounceText}>{phrase.pronounce}</Text>
+        </View>
+        <TouchableOpacity style={styles.speakButton} onPress={() => speakPhrase(phrase)}>
+            <Icon name="volume-up" size={24} color="#fff" />
+        </TouchableOpacity>
+    </View>
+));
 
 const KhmerLearningScreen = () => {
     const [language, setLanguage] = useState('pronounce'); 
@@ -18,22 +32,17 @@ const KhmerLearningScreen = () => {
             <Image source={require('../assets/images/cambodia-kmer-language.jpg')} style={styles.image} />
             <FlatList
                 data={sections}
-                keyExtractor={(item, index) => index.toString()}
+                keyExtractor={(item) => item}
                 renderItem={({ item }) => (
                     <View>
                         <Text style={styles.sectionTitle}>{item}</Text>
                         {learningData[0][item].map((phrase, index) => (
-                            <View key={index} style={styles.phraseContainer}>
-                                <View style={styles.textContainer}>
-                                    <Text style={styles.englishText}>{phrase.english}</Text>
-                                    <Text style={styles.khmerText}>{phrase.khmer}</Text>
-                                    <Text style={styles.burmeseText}>{phrase.burmese}</Text>
-                                    <Text style={styles.pronounceText}>{phrase.pronounce}</Text>
-                                </View>
-                                <TouchableOpacity style={styles.speakButton} onPress={() => speakPhrase(phrase)}>
-                                    <Icon name="volume-up" size={24} color="#fff" />
-                                </TouchableOpacity>
-                            </View>
+                            <PhraseItem 
+                                key={index}
+                                phrase={phrase}
+                                language={language}
+                                speakPhrase={speakPhrase}
+                            />
                         ))}
                     </View>
                 )}
