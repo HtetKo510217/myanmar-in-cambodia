@@ -1,52 +1,47 @@
 import React, { useState } from 'react';
-import { ScrollView, View, Text, TouchableOpacity, FlatList, Image, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import * as Speech from 'expo-speech';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import learningData from '../data/khmerPhrases.json';
 
-const phrases = [
-    { khmer: "សួស្ដី", burmese: "မင်္ဂလာပါ", english: "Hello", pronounce: "soom srdei" },
-    { khmer: "សូមអរគុណ", burmese: "ကျေးဇူးတင်ပါတယ်", english: "Thank you", pronounce: "saum arkoun" },
-    { khmer: "ជំរាបលា", burmese: "သွားတော့မယ်", english: "Goodbye", pronounce: "jom-reab-lear" },
-    { khmer: "បាទ/ចាស", burmese: "ဟုတ်ကဲ့", english: "Yes", pronounce: "baht/cha" },
-    { khmer: "ទេ", burmese: "မဟုတ်ဘူး", english: "No", pronounce: "te" },
-    { khmer: "សូមទោស", burmese: "ဆောရီး", english: "Sorry", pronounce: "soum toh" },
-    { khmer: "ចង់បាន", burmese: "လိုချင်တယ်", english: "Want", pronounce: "jong ban" },
-    { khmer: "ធ្វើដំណើរ", burmese: "ခရီးသွား", english: "Travel", pronounce: "twer dom-nao" },
-    { khmer: "ល្អ", burmese: "ကောင်းတယ်", english: "Good", pronounce: "lah" },
-    { khmer: "មិនល្អ", burmese: "မကောင်းဘူး", english: "Bad", pronounce: "min lah" }
-];
-
-export default function KhmerLearningScreen() {
-    const [language, setLanguage] = useState('pronounce');
-
+const KhmerLearningScreen = () => {
+    const [language, setLanguage] = useState('pronounce'); 
     const speakPhrase = (phrase) => {
         const text = phrase[language];
         Speech.speak(text);
     };
 
+    const sections = Object.keys(learningData[0]);
+
     return (
         <View style={styles.container}>
             <Image source={require('../assets/images/cambodia-kmer-language.jpg')} style={styles.image} />
             <FlatList
-                data={phrases}
-                keyExtractor={(item) => item.english}
+                data={sections}
+                keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
-                    <View style={styles.phraseContainer}>
-                        <View style={styles.textContainer}>
-                            <Text style={styles.englishText}>{item.english}</Text>
-                            <Text style={styles.khmerText}>{item.khmer}</Text>
-                            <Text style={styles.burmeseText}>{item.burmese}</Text>
-                        </View>
-                        <TouchableOpacity style={styles.speakButton} onPress={() => speakPhrase(item)}>
-                            <Icon name="volume-up" size={24} color="#fff" />
-                        </TouchableOpacity>
+                    <View>
+                        <Text style={styles.sectionTitle}>{item}</Text>
+                        {learningData[0][item].map((phrase, index) => (
+                            <View key={index} style={styles.phraseContainer}>
+                                <View style={styles.textContainer}>
+                                    <Text style={styles.englishText}>{phrase.english}</Text>
+                                    <Text style={styles.khmerText}>{phrase.khmer}</Text>
+                                    <Text style={styles.burmeseText}>{phrase.burmese}</Text>
+                                    <Text style={styles.pronounceText}>{phrase.pronounce}</Text>
+                                </View>
+                                <TouchableOpacity style={styles.speakButton} onPress={() => speakPhrase(phrase)}>
+                                    <Icon name="volume-up" size={24} color="#fff" />
+                                </TouchableOpacity>
+                            </View>
+                        ))}
                     </View>
                 )}
                 style={styles.phraseListContainer}
             />
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -59,8 +54,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom: 20,
     },
-    phraseListContainer: {
-        flex: 1,
+    sectionTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginTop: 20,
+        marginBottom: 20,
     },
     phraseContainer: {
         flexDirection: 'row',
@@ -93,6 +91,11 @@ const styles = StyleSheet.create({
     burmeseText: {
         fontSize: 16,
         color: '#000',
+        marginBottom: 4,
+    },
+    pronounceText: {
+        fontSize: 14,
+        color: '#555',
     },
     speakButton: {
         backgroundColor: '#7D7C7C',
@@ -100,6 +103,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: 10,
     },
 });
+
+export default KhmerLearningScreen;

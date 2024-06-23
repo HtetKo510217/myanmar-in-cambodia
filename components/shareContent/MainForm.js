@@ -11,7 +11,6 @@ const MainForm = () => {
 
   const handleContentAdd = (content) => {
     setContents([...contents, content]);
-    // console.log('Content added:', content);
     storeDataInDB(content);
   };
 
@@ -31,7 +30,6 @@ const MainForm = () => {
       imageUrl: downloadUrl,
       address: data.address
     }
-    console.log("posts", posts)
     addPost(postData);
     storeData(postData);
   };

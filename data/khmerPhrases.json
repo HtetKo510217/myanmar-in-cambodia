@@ -1,0 +1,548 @@
+[
+    {
+        "Greeting People": [
+            {
+                "khmer": "សួស្តី!",
+                "burmese": "မင်္ဂလာပါ",
+                "english": "Hello!",
+                "pronounce": "Su Sdei!"
+            },
+            {
+                "khmer": "អ្នក​សុខសប្បាយ​ជាទេ?",
+                "burmese": "အခြေအနေဘယ်လိုလည်း",
+                "english": "How are you?",
+                "pronounce": "Neak Sok Sabay Chea Te?"
+            },
+            {
+                "khmer": "ខ្ញុំ​សុខ​សប្បាយ!",
+                "burmese": "ကောင်းပါတယ်",
+                "english": "I am fine!",
+                "pronounce": "khnhom​ Sok​ Sabay!"
+            },
+            {
+                "khmer": "ខ្ញុំ​ពិបាកចិត្ត។",
+                "burmese": "မကောင်းဘူးဗျာ",
+                "english": "I am sad.",
+                "pronounce": "Khnhom​ Pibak Chet."
+            },
+            {
+                "khmer": "តើ​អ្នក​មាន​ឈ្មោះ​អ្វី?",
+                "burmese": "ခင်ဗျာ နံမည်ဘယ်လိုခေါ်လည်း",
+                "english": "What is your name?",
+                "pronounce": "Tae​u Neak​ Mean​ Chhmuoh​ Avei?"
+            },
+            {
+                "khmer": "ឈ្មោះ​របស់ខ្ញុំ​គឺ…",
+                "burmese": "ကျနော် နံမည် ...",
+                "english": "My name is…",
+                "pronounce": "Chhmuoh​ Roboah Khnhom Kueu…"
+            },
+            {
+                "khmer": "តើ​អ្នក​មកពីណា?",
+                "burmese": "ခင်ဗျား ကဘယ်ကလည်း",
+                "english": "Where are you from?",
+                "pronounce": "Taeu​ Neak​ Mok Pina?"
+            },
+            {
+                "khmer": "ខ្ញុំ​មកពី…",
+                "burmese": "ကျနော်က ...ကပါ",
+                "english": "I am from…",
+                "pronounce": "Khnhom​ Mok Pi…"
+            },
+            {
+                "khmer": "តើអ្នកចេះភាសាខ្មែរទេ?",
+                "burmese": "ခင်ဗျာ ခမာလို ပြောတတ်လား?",
+                "english": "Can you speak Khmer?",
+                "pronounce": "Taeu Neak Cheh Pheasa Khmer Te?"
+            },
+            {
+                "khmer": "ខ្ញុំសុំទោស ខ្ញុំមិនចេះខ្មែរទេ។",
+                "burmese": "မပြောတတ်ပါဘူး ခင်ဗျာ",
+                "english": "I’m sorry, I can’t speak Khmer.",
+                "pronounce": "Khnhom Somtos Khnhom Min Cheh Khmer Te."
+            },
+            {
+                "khmer": "តើអ្នកនិយាយភាសាអង់គ្លេសទេ?",
+                "burmese": "အင်္ဂလိပ် လိုရော ပြောတတ်ပါသလား",
+                "english": "Do you speak English?",
+                "pronounce": "Taeu Neak Cheh Pheasa Angkles Te?"
+            },
+            {
+                "khmer": "តើ​អ្នក​យល់​ទេ?",
+                "burmese": "နားလည် လား ?",
+                "english": "Do you understand?",
+                "pronounce": "Taeu​ Neak​ Yol​ Te?"
+            },
+            {
+                "khmer": "ខ្ញុំ​យល់។",
+                "burmese": "နားလည် ပါတယ်",
+                "english": "I understand.",
+                "pronounce": "Khnhom​ Yol."
+            },
+            {
+                "khmer": "ខ្ញុំមិនយល់ទេ។",
+                "burmese": "နား မလည်ဘူး",
+                "english": "I don’t understand.",
+                "pronounce": "Khnhom Min Yol Te."
+            },
+            {
+                "khmer": "បាទ",
+                "burmese": "ဟုတ်ကဲ.",
+                "english": "Yes!",
+                "pronounce": "Baht!"
+            },
+            {
+                "khmer": "ទេ",
+                "burmese": "မဟုတ်ဘူး",
+                "english": "No",
+                "pronounce": "Te"
+            },
+            {
+                "khmer": "គ្មាន​បញ្ហា!",
+                "burmese": "ကိစ္စ မရှိပါဘူး",
+                "english": "No problem!",
+                "pronounce": "Khmean​ Panhaha!"
+            },
+            {
+                "khmer": "រីករាយដែលបានជួបអ្នក!",
+                "burmese": "တွေ. ရတာ ၀မ်းသာပါတယ်",
+                "english": "It’s nice to meet you!",
+                "pronounce": "Rikreay Dael Ban Chuob Neak!"
+            },
+            {
+                "khmer": "តើ​អ្នក​កំពុង​ទៅណា?",
+                "burmese": "ဘယ်လည်း ဗျ",
+                "english": "Where are you going?",
+                "pronounce": "Taeu​ Neak​ Kampong​ Tov Na?"
+            },
+            {
+                "khmer": "ខ្ញុំ​នឹង​ទៅ…",
+                "burmese": "_ သွားမလို.ဗျ",
+                "english": "I am going to…",
+                "pronounce": "Khnhom​ Nueng​ Tov…"
+            },
+            {
+                "khmer": "តើ​ផ្សារ​នៅ​ឯណា​?",
+                "burmese": "စျေးက ဘယ်မှာလည်း?",
+                "english": "Where is the market?",
+                "pronounce": "Taeu​ Phsar​ Now​ Aena?"
+            },
+            {
+                "khmer": "អរគុណ!",
+                "burmese": "ကျေးဇူးတင်ပါတယ်",
+                "english": "Thank you!",
+                "pronounce": "Or Kun!"
+            },
+            {
+                "khmer": "ជួប​គ្នា​ពេល​ក្រោយ!",
+                "burmese": "နောက်မှ ပြန်တွေ.မယ်ဗျာ",
+                "english": "See you later!",
+                "pronounce": "Chuob​ Knea​ Pel​ Kraoy!"
+            },
+            {
+                "khmer": "ស្អែក​ជួប​គ្នា!",
+                "burmese": "မနက်ဖြန် ဆုံကြမယ်",
+                "english": "See you tomorrow!",
+                "pronounce": "S’aek​ Chuob​ Knea!"
+            },
+            {
+                "khmer": "លាហើយ!",
+                "burmese": "သွားတော့မယ်",
+                "english": "Goodbye!",
+                "pronounce": "Ot Teh!"
+            }
+        ],
+        "Essential Pronouns": [
+            {
+                "khmer": "ខ្ញុំ",
+                "burmese": "ကျွန်တော်ကို",
+                "english": "Me",
+                "pronounce": "Khnhom"
+            },
+            {
+                "khmer": "អ្នក",
+                "burmese": "မင်း",
+                "english": "You",
+                "pronounce": "Neak"
+            },
+            {
+                "khmer": "នាង",
+                "burmese": "သူမ",
+                "english": "She",
+                "pronounce": "Neang"
+            },
+            {
+                "khmer": "របស់នាង",
+                "burmese": "သူမကို",
+                "english": "Her",
+                "pronounce": "Roboas neang"
+            },
+            {
+                "khmer": "គាត់",
+                "burmese": "သူ/သူကို",
+                "english": "He/Him",
+                "pronounce": "Koat"
+            },
+            {
+                "khmer": "វា",
+                "burmese": "ထိုအရာ",
+                "english": "It",
+                "pronounce": "Vea"
+            },
+            {
+                "khmer": "យើង",
+                "burmese": "ကျွန်တော်တို့",
+                "english": "We",
+                "pronounce": "Yeung"
+            },
+            {
+                "khmer": "ពួកយើង",
+                "burmese": "ကျွန်တော်တို့ကို",
+                "english": "Us",
+                "pronounce": "Puok Yeung"
+            },
+            {
+                "khmer": "ពួកគេ",
+                "burmese": "သူတို့",
+                "english": "They",
+                "pronounce": "Puok Ke"
+            },
+            {
+                "khmer": "ពួកគេ",
+                "burmese": "သူတို့ကို",
+                "english": "Them",
+                "pronounce": "Puok Ke"
+            }
+        ],
+        "Dining Out": [
+            {
+                "english": "I am hungry!",
+                "khmer": "ខ្ញុំ​ឃ្លាន!",
+                "burmese": "ဗိုက်ဆာတယ်!",
+                "pronounce": "Khnhom​ Khlean!"
+            },
+            {
+                "english": "I am thirsty!",
+                "khmer": "ខ្ញុំ​ស្រេកទឹក!",
+                "burmese": "ရေဆာတယ်!",
+                "pronounce": "Khnhom​ Srektuek!"
+            },
+            {
+                "english": "Can I order?",
+                "khmer": "តើខ្ញុំអាចកម្មង់បានទេ?",
+                "burmese": "အော်ဒါမှာလို့ရမလား",
+                "pronounce": "Taeu Khnhom Ach Kom Mong Ban Te?"
+            },
+            {
+                "english": "I’d like to order…",
+                "khmer": "ខ្ញុំចង់កម្មង់ម្ហូប…",
+                "burmese": "မှာချင်ပါတယ်…",
+                "pronounce": "Khnhom Chang Kom Mong M’houb…"
+            },
+            {
+                "english": "Water, please?",
+                "khmer": "សូមទឹកបានទេ?",
+                "burmese": "ရေ ပေးပါ?",
+                "pronounce": "Soum Tuek Ban Te?"
+            },
+            {
+                "english": "I am a vegetarian.",
+                "khmer": "ខ្ញុំជាអ្នកញ៉ាំអាហារបួស។",
+                "burmese": "ငါက သက်သတ်လွတ်သမားပါ",
+                "pronounce": "Khnhom Chea Neak Nham Aha Buos."
+            },
+            {
+                "english": "No spicy, please.",
+                "khmer": "មិនហឹរ។",
+                "burmese": "ကျေးဇူးပြု၍ အစပ်မထည်.ပါနဲ.",
+                "pronounce": "Min Hel Te."
+            },
+            {
+                "english": "Really spicy, please!",
+                "khmer": "ពិតជាហឹរមែនទែន!",
+                "burmese": "အရမ်းစပ်တယ် ကျေးဇူးပြုပြီး",
+                "pronounce": "Pitchea Hel Men Ten!"
+            },
+            {
+                "english": "Do you have…?",
+                "khmer": "តើ​អ្នក​មាន​…ទេ?",
+                "burmese": "သင့်မှာ ... ရှိလား",
+                "pronounce": "Tae​u Neak​ mean​ … Te?"
+            },
+            {
+                "english": "What is this?",
+                "khmer": "តើ​នេះ​ជា​អ្វី?",
+                "burmese": "ဒါဘာလဲ?",
+                "pronounce": "Taeu​ Nih​ Chea​ Avei?"
+            },
+            {
+                "english": "I love it!",
+                "khmer": "ខ្ញុំ​ស្រឡាញ់​វា!",
+                "burmese": "ကြိုက်တယ်",
+                "pronounce": "Khnhom​ sralanh​ Vea!"
+            },
+            {
+                "english": "It tastes delicious!",
+                "khmer": "វាមានរសជាតិឆ្ងាញ់!",
+                "burmese": "အရသာရှိတယ်",
+                "pronounce": "Vea Mean Rosacheate Chhnhanh!"
+            },
+            {
+                "english": "I don’t like it.",
+                "khmer": "ខ្ញុំមិនចូលចិត្តវាទេ។",
+                "burmese": "ကျွန်တော်မကြိုက်ဘူး",
+                "pronounce": "Khnhom Min Choulchet Vea Te."
+            },
+            {
+                "english": "How much is it?",
+                "khmer": "តើ​វា​មានតម្លៃ​ប៉ុន្មាន?",
+                "burmese": "ဘယ်လောက်လဲ?",
+                "pronounce": "Taeu​ Vea​ Mean Tamlai​ Ponman?"
+            },
+            {
+                "english": "Expensive",
+                "khmer": "ថ្លៃ",
+                "burmese": "ဈေးကြီးတယ်",
+                "pronounce": "Thlai"
+            },
+            {
+                "english": "Cheap",
+                "khmer": "ថោក",
+                "burmese": "စျေးချိုတယ်",
+                "pronounce": "Thaok"
+            },
+            {
+                "english": "The bill, please?",
+                "khmer": "វិក័យប័ត្រសូម?",
+                "burmese": "ကျေးဇူးပြုပြီး ရှင်းပါ့မယ်?",
+                "pronounce": "Soum Kuet Luy"
+            },
+            {
+                "english": "I will definitely come back!",
+                "khmer": "ខ្ញុំប្រាកដជាត្រលប់មកវិញ!",
+                "burmese": "ငါသေချာပေါက်ပြန်လာမှာပါ!",
+                "pronounce": "Khnhom Prakad Chea Tralab Mok Vinh!"
+            }
+        ],
+        "Essential Verbs": [
+            {
+                "english": "To travel",
+                "khmer": "ធ្វើ​ដំណើរ",
+                "burmese": "ခရီးသွားမယ်",
+                "pronounce": "Thveu​ Damnaeu"
+            },
+            {
+                "english": "To love",
+                "khmer": "ស្រឡាញ់",
+                "burmese": "ချစ်မယ်",
+                "pronounce": "Sralanh"
+            },
+            {
+                "english": "To hate",
+                "khmer": "ស្អប់",
+                "burmese": "မုန်းမယ်",
+                "pronounce": "S’ab"
+            },
+            {
+                "english": "To like",
+                "khmer": "ចូលចិត្ត",
+                "burmese": "ကြိုက်တယ်",
+                "pronounce": "Choul Chet"
+            },
+            {
+                "english": "To agree",
+                "khmer": "យល់ព្រម",
+                "burmese": "သဘောတူတယ်",
+                "pronounce": "Yol Prom"
+            },
+            {
+                "english": "To disagree",
+                "khmer": "មិនយល់ស្រប",
+                "burmese": "သဘော မတူဘူး",
+                "pronounce": "Min Yol Srab"
+            },
+            {
+                "english": "To date",
+                "khmer": "មកទល់បច្ចុប្បន្ន",
+                "burmese": "ချိန်းတွေ.ရန်",
+                "pronounce": "Mok Tol Pachchoban"
+            },
+            {
+                "english": "To eat",
+                "khmer": "ញ៉ាំ",
+                "burmese": "စားရန်",
+                "pronounce": "Nham"
+            },
+            {
+                "english": "To drink",
+                "khmer": "ផឹក",
+                "burmese": "သောက်ရန်",
+                "pronounce": "Phoek"
+            },
+            {
+                "english": "To think",
+                "khmer": "គិត",
+                "burmese": "စဉ်းစားရန်",
+                "pronounce": "Kit"
+            },
+            {
+                "english": "To go",
+                "khmer": "ទៅ",
+                "burmese": "သွားမယ်",
+                "pronounce": "Tov"
+            },
+            {
+                "english": "To dream",
+                "khmer": "សុបិន្ត",
+                "burmese": "အိပ်မက် မက်ဖို့",
+                "pronounce": "Soben"
+            },
+            {
+                "english": "To visit",
+                "khmer": "ទៅ​លេង",
+                "burmese": "လည်ပတ်ရန်",
+                "pronounce": "Tov​ Leng"
+            },
+            {
+                "english": "To translate",
+                "khmer": "បកប្រែ",
+                "burmese": "ဘာသာပြန်ရန်",
+                "pronounce": "Boak Prae"
+            },
+            {
+                "english": "To talk",
+                "khmer": "និយាយ",
+                "burmese": "စကားပြောမယ်",
+                "pronounce": "Niyeay"
+            }
+        ],
+        "essentialNouns": [
+            {
+                "english": "Bathroom",
+                "khmer": "បន្ទប់ទឹក",
+                "burmese": "ရေချိုးခန်း",
+                "pronounce": "Bantobtuek"
+            },
+            {
+                "english": "Toilet",
+                "khmer": "បង្គន់",
+                "burmese": "အိမ်သာ",
+                "pronounce": "Bangkon"
+            },
+            {
+                "english": "Phone",
+                "khmer": "ទូរស័ព្ទ",
+                "burmese": "ဖုန်း",
+                "pronounce": "Tourosap"
+            },
+            {
+                "english": "Data",
+                "khmer": "ទិន្នន័យ",
+                "burmese": "ဒေတာ",
+                "pronounce": "Tinaney"
+            },
+            {
+                "english": "TV",
+                "khmer": "ទូរទស្សន៍",
+                "burmese": "တီဗွီ",
+                "pronounce": "Tourotos"
+            },
+            {
+                "english": "Laptop",
+                "khmer": "កុំព្យូទ័រយួរដៃ",
+                "burmese": "လက်တော့ပ်",
+                "pronounce": "Kompyouteu Yuordai"
+            },
+            {
+                "english": "Book",
+                "khmer": "សៀវភៅ",
+                "burmese": "စာအုပ်",
+                "pronounce": "Sievphov"
+            },
+            {
+                "english": "Language",
+                "khmer": "ភាសា",
+                "burmese": "ဘာသာစကား",
+                "pronounce": "Pheasa"
+            },
+            {
+                "english": "Friends",
+                "khmer": "មិត្តភក្តិ",
+                "burmese": "သူငယ်ချင်းများ",
+                "pronounce": "Mit Pheak"
+            },
+            {
+                "english": "Trip",
+                "khmer": "ដំណើរកំសាន្ត",
+                "burmese": "လေ့လာရေးခရီး",
+                "pronounce": "Damnaeu Kamsan"
+            },
+            {
+                "english": "Airplane",
+                "khmer": "យន្តហោះ",
+                "burmese": "လေယာဉ်ပျံ",
+                "pronounce": "Yon Hoah"
+            },
+            {
+                "english": "World",
+                "khmer": "ពិភពលោក",
+                "burmese": "ကမ္ဘာ",
+                "pronounce": "Piphop Louk"
+            },
+            {
+                "english": "Address",
+                "khmer": "អាសយដ្ឋាន",
+                "burmese": "လိပ်စာ",
+                "pronounce": "Asai Than"
+            },
+            {
+                "english": "Locals",
+                "khmer": "អ្នកស្រុក",
+                "burmese": "ဒေသခံများ",
+                "pronounce": "Neak Srok"
+            },
+            {
+                "english": "Cambodians",
+                "khmer": "ជនជាតិខ្មែរ",
+                "burmese": "ခမာလူမျိုးများ",
+                "pronounce": "Choncheat Khmer"
+            },
+            {
+                "english": "Plate",
+                "khmer": "ចាន",
+                "burmese": "ပန်းကန်",
+                "pronounce": "Chan"
+            },
+            {
+                "english": "Bowl",
+                "khmer": "ចានគោម",
+                "burmese": "ခွက်",
+                "pronounce": "Chan Koum"
+            },
+            {
+                "english": "Spoon",
+                "khmer": "ស្លាបព្រា",
+                "burmese": "ဇွန်း",
+                "pronounce": "Slab Prea"
+            },
+            {
+                "english": "Fork",
+                "khmer": "សម",
+                "burmese": "ခက်ရင်း",
+                "pronounce": "Sam"
+            },
+            {
+                "english": "Chopsticks",
+                "khmer": "ចង្កឹះ",
+                "burmese": "တူ",
+                "pronounce": "Changkuah"
+            },
+            {
+                "english": "Napkin",
+                "khmer": "កន្សែង",
+                "burmese": "လက်သုတ်ပဝါ",
+                "pronounce": "Kansaeng"
+            }
+        ]
+    }
+]
