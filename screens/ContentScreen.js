@@ -11,20 +11,13 @@ function ContentScreen({ route, navigation }) {
     const catId = route.params.categoryId;
     const displayContent = posts.filter((content) => content.categoryIds === catId);
 
-    const fetchContent = useCallback(async () => {
-        const contents = await getData();
-        setPosts(contents);
-    }, [setPosts]);
-
     useEffect(() => {
+        async function fetchContent() {
+            const contents = await getData();
+            setPosts(contents);
+        }
         fetchContent();
-    }, [fetchContent]);
-
-    useFocusEffect(
-        useCallback(() => {
-            fetchContent();
-        }, [fetchContent])
-    );
+    }, []);
 
     useLayoutEffect(() => {
         const categoryTitle = CATEGORIES.find((category) => category.id === catId).title;

@@ -80,6 +80,7 @@ const AddContentForm = ({ onContentAdd }) => {
         shadow: true,
         animation: true,
         hideOnPress: true,
+        backgroundColor: 'green',
       });
       navigation.goBack();
     }, 2000);

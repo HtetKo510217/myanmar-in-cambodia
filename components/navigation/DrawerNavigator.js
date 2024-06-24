@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
-import { Alert } from 'react-native';
 import HomeScreen from '../../screens/HomeScreen';
 import CategoriesScreen from '../../screens/CategoriesScreen';
 import ShareContentScreen from '../../screens/ShareContentScreen';
 import ExchangeScreen from '../../screens/ExchangeScreen';
 import MyanmarEmbassy from '../../screens/MyanmarEmbassy';
 import AboutMeScreen from '../../screens/AboutMeScreen';
+import UserProfileScreen from '../../screens/UserProfileScreen';
 import { AuthContext } from '../../store/auth-context';
 
 const Drawer = createDrawerNavigator();
@@ -19,7 +19,6 @@ function DrawerNavigator() {
         <Drawer.Navigator
             screenOptions={{
                 headerStyle: { backgroundColor: '#FFC30B' },
-
                 headerTintColor: 'white',
                 sceneContainerStyle: { backgroundColor: '#fff' },
                 drawerContentStyle: { backgroundColor: '#fff' },
@@ -35,33 +34,6 @@ function DrawerNavigator() {
                     title: 'Home',
                     drawerIcon: ({ color, size }) => (
                         <Ionicons name="home" color={color} size={size} />
-                    ),
-                    headerRight: () => (
-                        <Ionicons
-                            name="exit"
-                            size={25}
-                            color="#351401"
-                            style={{ marginRight: 15 }}
-                            onPress={() => {
-                                Alert.alert(
-                                    'Logout',
-                                    'Are you sure you want to logout?',
-                                    [
-                                        {
-                                            text: 'Cancel',
-                                            style: 'cancel',
-                                        },
-                                        {
-                                            text: 'Logout',
-                                            onPress: () => {
-                                                authCtx.logout();
-                                            },
-                                        },
-                                    ],
-                                    { cancelable: false }
-                                );
-                            }}
-                        />
                     ),
                 }}
             />
@@ -103,6 +75,16 @@ function DrawerNavigator() {
                     title: 'Myanmar Embassy',
                     drawerIcon: ({ color, size }) => (
                         <Ionicons name="flag" color={color} size={size} />
+                    ),
+                }}
+            />
+            <Drawer.Screen
+                name="User Profile"
+                component={UserProfileScreen}
+                options={{
+                    title: 'User Profile',
+                    drawerIcon: ({ color, size }) => (
+                        <Ionicons name="person" color={color} size={size} />
                     ),
                 }}
             />

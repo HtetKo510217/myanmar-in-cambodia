@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState, useEffect, useContext, useCallback } from 'react';
+import React, { useLayoutEffect, useState, useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, Alert } from 'react-native';
 import { PostContext } from '../store/post-context';
 import AddressText from '../components/content/AddressText';
@@ -9,8 +9,10 @@ import { useFocusEffect } from '@react-navigation/native';
 
 function ContentDetailScreen({ route, navigation }) {
     const contentId = route.params.contentId;
+    const updated = route.params.updated;
     const { posts, deletePost } = useContext(PostContext);
     const [content, setContent] = useState(null);
+
     const fetchContent = () => {
         if (posts.length > 0) {
             const foundContent = posts.find((content) => content.id === contentId);
@@ -20,13 +22,13 @@ function ContentDetailScreen({ route, navigation }) {
 
     useEffect(() => {
         fetchContent();
-    }, [posts]);
+    }, []);
 
-    useFocusEffect(
-        useCallback(() => {
+    useFocusEffect(() => {
+        if (updated) {
             fetchContent();
-        }, [posts])
-    );
+        }
+    });
 
     useLayoutEffect(() => {
         if (content) {
@@ -36,7 +38,6 @@ function ContentDetailScreen({ route, navigation }) {
             });
         }
     }, [navigation, content]);
-
 
     async function deleteContent() {
         if (content) {
@@ -59,6 +60,7 @@ function ContentDetailScreen({ route, navigation }) {
                                 shadow: true,
                                 animation: true,
                                 hideOnPress: true,
+                                backgroundColor: 'red',
                             });
                             navigation.goBack();
                         },
@@ -87,8 +89,7 @@ function ContentDetailScreen({ route, navigation }) {
                     <Text style={styles.address}>Address: </Text>
                     <AddressText address={content.address} />
                 </View>}
-
-                <View >
+                <View>
                     <ActionButton onPress={() => navigation.navigate('EditContent', { contentId })} userId={content.userId} type="edit" />
                     <ActionButton onPress={deleteContent} userId={content.userId} type="delete" />
                 </View>

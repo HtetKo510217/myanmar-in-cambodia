@@ -83,8 +83,13 @@ function EditContentScreen({ route, navigation }) {
             shadow: true,
             animation: true,
             hideOnPress: true,
+            backgroundColor: 'green',
         });
-        navigation.goBack();
+        navigation.navigate('ContentDetail', {
+            contentId: content.id,
+            updated: true
+        });
+
     };
 
     if (!content) {
