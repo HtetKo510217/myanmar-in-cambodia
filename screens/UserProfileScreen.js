@@ -4,10 +4,12 @@ import { Avatar, Card, Icon, Button as ElementsButton } from 'react-native-eleme
 import { getUserProfile, updateUserProfile, deleteUser } from '../util/user';
 import { getData, deleteData } from '../util/http';
 import { AuthContext } from '../store/auth-context';
+import { PostContext } from '../store/post-context';
 import { useFocusEffect } from '@react-navigation/native';
 import ContentItem from '../components/content/ContentItem';
 function UserProfileScreen({ navigation }) {
   const authCtx = useContext(AuthContext);
+  const { setPosts } = useContext(PostContext);
 
   const [profile, setProfile] = useState({
     name: '',
@@ -32,6 +34,7 @@ function UserProfileScreen({ navigation }) {
   const fetchUserPosts = useCallback(async () => {
     try {
       const posts = await getData();
+      setPosts(posts);
       const filteredPosts = posts.filter(post => post.userId === userId);
       setUserPosts(filteredPosts);
     } catch (error) {

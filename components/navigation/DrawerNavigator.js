@@ -8,6 +8,7 @@ import ExchangeScreen from '../../screens/ExchangeScreen';
 import MyanmarEmbassy from '../../screens/MyanmarEmbassy';
 import AboutMeScreen from '../../screens/AboutMeScreen';
 import UserProfileScreen from '../../screens/UserProfileScreen';
+import FaqScreen from '../../screens/FaqScreen';
 import { AuthContext } from '../../store/auth-context';
 
 const Drawer = createDrawerNavigator();
@@ -85,6 +86,16 @@ function DrawerNavigator() {
                     title: 'User Profile',
                     drawerIcon: ({ color, size }) => (
                         <Ionicons name="person" color={color} size={size} />
+                    ),
+                }}
+            />
+            <Drawer.Screen
+                name="FAQ"
+                component={FaqScreen}
+                options={{
+                    title: 'FAQ',
+                    drawerIcon: ({ color, size }) => (
+                        <Ionicons name="help-circle" color={color} size={size} />
                     ),
                 }}
             />
