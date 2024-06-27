@@ -1,8 +1,13 @@
 import React, { useState, memo } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
-import * as Speech from 'expo-speech';
+import { Audio } from 'expo-av';
+import axios from 'axios';
+import * as FileSystem from 'expo-file-system';
+import { encode } from 'base64-arraybuffer';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import learningData from '../data/khmerPhrases.json';
+
+const EXPO_PUBLIC_EDGE_TTS_API = process.env.EXPO_PUBLIC_EDGE_TTS_API;
 
 const PhraseItem = memo(({ phrase, language, speakPhrase }) => (
     <View style={styles.phraseContainer}>
@@ -19,10 +24,31 @@ const PhraseItem = memo(({ phrase, language, speakPhrase }) => (
 ));
 
 const KhmerLearningScreen = () => {
-    const [language, setLanguage] = useState('pronounce'); 
-    const speakPhrase = (phrase) => {
+    const [language, setLanguage] = useState('khmer');
+    const [sound, setSound] = useState();
+
+    const speakPhrase = async (phrase) => {
         const text = phrase[language];
-        Speech.speak(text);
+        try {
+            const response = await axios.post(EXPO_PUBLIC_EDGE_TTS_API, { text }, {
+                responseType: 'arraybuffer',
+            });
+
+            const base64 = encode(response.data);
+
+            const fileUri = FileSystem.documentDirectory + 'output.mp3';
+            await FileSystem.writeAsStringAsync(fileUri, base64, {
+                encoding: FileSystem.EncodingType.Base64,
+            });
+
+            const { sound } = await Audio.Sound.createAsync(
+                { uri: fileUri },
+                { shouldPlay: true }
+            );
+            setSound(sound);
+        } catch (error) {
+            console.error('Error with TTS:', error);
+        }
     };
 
     const sections = Object.keys(learningData[0]);
@@ -37,7 +63,7 @@ const KhmerLearningScreen = () => {
                     <View>
                         <Text style={styles.sectionTitle}>{item}</Text>
                         {learningData[0][item].map((phrase, index) => (
-                            <PhraseItem 
+                            <PhraseItem
                                 key={index}
                                 phrase={phrase}
                                 language={language}

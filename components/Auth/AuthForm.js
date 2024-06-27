@@ -52,6 +52,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
           value={enteredEmail}
           keyboardType="email-address"
           isInvalid={emailIsInvalid}
+          placeholder={isLogin ? 'Enter Email Address' : 'Enter Email Address'}
         />
         {!isLogin && (
           <Input
@@ -60,6 +61,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
             value={enteredConfirmEmail}
             keyboardType="email-address"
             isInvalid={emailsDontMatch}
+            placeholder="Enter Email Address"
           />
         )}
         <Input
@@ -68,6 +70,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
           secure
           value={enteredPassword}
           isInvalid={passwordIsInvalid}
+          placeholder="Enter Password"
         />
         {!isLogin && (
           <Input
@@ -79,6 +82,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
             secure
             value={enteredConfirmPassword}
             isInvalid={passwordsDontMatch}
+            placeholder="Enter Confirm Password"
           />
         )}
         <View style={styles.buttons}>

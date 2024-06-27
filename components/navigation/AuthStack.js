@@ -36,7 +36,7 @@ function AuthStack() {
             screenOptions={{
                 headerStyle: { backgroundColor: '#FFC30B' },
                 headerTintColor: 'white',
-                contentStyle: { backgroundColor: '#fff' },
+                contentStyle: { backgroundColor: '#FFFAE6' },
                 headerBackTitle: 'Back',
             }}
         >

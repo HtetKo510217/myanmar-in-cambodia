@@ -9,6 +9,7 @@ function Input({
   onUpdateValue,
   value,
   isInvalid,
+  placeholder
 }) {
   return (
     <View style={styles.inputContainer}>
@@ -22,6 +23,7 @@ function Input({
         secureTextEntry={secure}
         onChangeText={onUpdateValue}
         value={value}
+        placeholder={placeholder}
       />
     </View>
   );
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   label: {
-    color: 'white',
+    color: '#FFC30B',
     marginBottom: 8,
   },
   labelInvalid: {
@@ -43,7 +45,7 @@ const styles = StyleSheet.create({
   input: {
     paddingVertical: 14,
     paddingHorizontal: 6,
-    backgroundColor: Colors.primary100,
+    backgroundColor: 'white',
     borderRadius: 4,
     fontSize: 16,
   },
