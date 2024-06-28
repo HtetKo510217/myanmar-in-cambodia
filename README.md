@@ -36,6 +36,13 @@ Your feedback is valuable to us! If you have any suggestions, feature requests, 
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
+## Download
+
+Myanmar in Cambodia Guide is available for download on the Amazon Appstore.
+
+[Download on Amazon Appstore](https://www.amazon.com/gp/product/B0D8B9CZXP)
+
+
 ## Screenshots
 
 <img src="assets/images/readme/screenshot1.jpg" alt="Screenshot 1" width="400">
