@@ -47,7 +47,7 @@ const FaqScreen = () => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.title}>Frequently Asked Questions</Text>
+            <Text style={styles.title}>မကြာခဏ မေးလေ့ရှိသော မေးခွန်းများ</Text>
             {faqData.map((item, index) => (
                 <View key={index} style={styles.faqItem}>
                     <TouchableOpacity
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     title: {
-        fontSize: 24,
+        fontSize: 22,
         fontWeight: 'bold',
         marginBottom: 20,
         color: '#333',

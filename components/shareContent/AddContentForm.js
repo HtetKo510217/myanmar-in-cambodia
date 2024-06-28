@@ -89,7 +89,9 @@ const AddContentForm = ({ onContentAdd }) => {
   const categoryItems = CATEGORIES.map((category) => ({
     label: category.title,
     value: category.id,
-  }));
+  })).filter((category) => category.value !== 'c7');
+
+  
 
   if (isLoading) {
     return (

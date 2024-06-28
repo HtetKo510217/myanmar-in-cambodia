@@ -5,11 +5,6 @@ import Message from '../components/home/Message';
 import { Card, Button, Icon } from '@rneui/themed';
 
 function HomeScreen({ navigation }) {
-    function pressHandler() {
-        navigation.navigate('Content', {
-            categoryId: 'c10'
-        });
-    }
 
     return (
         <ScrollView style={styles.container}>
@@ -28,9 +23,9 @@ function HomeScreen({ navigation }) {
                 </Card>
                 <Card containerStyle={styles.card}>
                     <Icon name="info" type="material" size={50} color="#FFC30B" />
-                    <Text style={styles.cardTitle}>ဆောင်ရန်/ရှောင်ရန်များ</Text>
+                    <Text style={styles.cardTitle}>FAQ</Text>
                     <Button
-                        onPress={pressHandler}
+                        onPress={() => navigation.navigate('FAQ')}
                         buttonStyle={styles.button}
                         titleStyle={styles.buttonTitle}
                     >
