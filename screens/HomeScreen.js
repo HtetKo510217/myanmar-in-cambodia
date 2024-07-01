@@ -29,7 +29,7 @@ function HomeScreen({ navigation }) {
                         buttonStyle={styles.button}
                         titleStyle={styles.buttonTitle}
                     >
-                        Learn More
+                        Go FAQ
                     </Button>
                 </Card>
             </View>
@@ -49,6 +49,22 @@ function HomeScreen({ navigation }) {
                         မြန်မာအချင်းချင်း အကူညီတစုံတရာပေးနိုင်ဖို့{'\n'} အလို့ငှာ တည်ဆောက်ထားရခြင်းဖြစ်ပါတယ်။
                     </Text>
                 </Message>
+            </Card>
+            <Card containerStyle={styles.messageCard}>
+                <Message title="CONTACT US">
+                    <Text style={styles.message}>
+                        App နဲ. ပက်သက်လို.ဘဲဖြစ်ဖြစ် {'\n'}
+                        အကြံပေးဆက်သွယ်လို. ဘဲဖြစ်ဖြစ် {'\n'}
+                        ကျနော်ကို ဆက်သွယ်လို. ရပါတယ်
+                    </Text>
+                </Message>
+                <Button
+                        onPress={() => navigation.navigate('AboutMe')}
+                        buttonStyle={[styles.button, { marginTop: 10 , width: '50%', marginLeft: '25%'}]}
+                        titleStyle={styles.buttonTitle}
+                    >
+                        CONTACT ME
+                    </Button>
             </Card>
         </ScrollView>
     );

@@ -1,11 +1,12 @@
 import React, { useLayoutEffect, useState, useEffect, useContext } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, Alert, TouchableOpacity, SafeAreaView } from 'react-native';
 import { PostContext } from '../store/post-context';
 import AddressText from '../components/content/AddressText';
 import ActionButton from '../components/content/ActionButton';
 import { deleteData } from '../util/http';
 import Toast from 'react-native-root-toast';
 import { useFocusEffect } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 function ContentDetailScreen({ route, navigation }) {
     const contentId = route.params.contentId;
@@ -70,64 +71,84 @@ function ContentDetailScreen({ route, navigation }) {
             );
         }
     }
-
     if (!content) {
         return (
-            <View style={styles.container}>
+            <View style={styles.loadingContainer}>
                 <Text>Loading...</Text>
             </View>
         );
     }
 
     return (
-        <ScrollView>
-            <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
+            <ScrollView>
                 <Image source={{ uri: content.imageUrl }} style={styles.image} />
-                <Text style={styles.title}>{content.title}</Text>
-                <Text style={styles.description}>{content.description}</Text>
-                {content.address && <View style={styles.container}>
-                    <Text style={styles.address}>Address: </Text>
-                    <AddressText address={content.address} />
-                </View>}
-                <View>
-                    <ActionButton onPress={() => navigation.navigate('EditContent', { contentId })} userId={content.userId} type="edit" />
-                    <ActionButton onPress={deleteContent} userId={content.userId} type="delete" />
+                <View style={styles.contentContainer}>
+                    <Text style={styles.title}>{content.title}</Text>
+                    <Text style={styles.description}>{content.description}</Text>
+                    {content.address && (
+                        <AddressText address={content.address} style={styles.address} />
+                    )}
                 </View>
+            </ScrollView>
+            <View style={styles.actionContainer}>
+                <ActionButton
+                    onPress={() => navigation.navigate('EditContent', { contentId })}
+                    userId={content.userId}
+                    type="edit"
+                />
+                <ActionButton
+                    onPress={deleteContent}
+                    userId={content.userId}
+                    type="delete"
+                />
             </View>
-        </ScrollView>
+        </SafeAreaView>
     );
 }
-
-export default ContentDetailScreen;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
+        backgroundColor: '#fff',
+    },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     image: {
         width: '100%',
-        height: 200,
-        borderRadius: 10,
+        height: 250,
+        resizeMode: 'cover',
+    },
+    contentContainer: {
+        padding: 20,
     },
     title: {
-        fontSize: 18,
+        fontSize: 24,
         fontWeight: 'bold',
-        margin: 10,
-        color: '#FA6326',
-        textAlign: 'center',
+        color: '#333',
+        marginBottom: 15,
     },
     description: {
         fontSize: 16,
-        margin: 10,
-        color: '#000',
+        color: '#666',
+        marginBottom: 20,
+        lineHeight: 24,
     },
     address: {
-        fontSize: 16,
-        margin: 10,
-        color: '#000',
-        textAlign: 'center',
-        fontStyle: 'italic',
-        fontWeight: 'bold',
-    }
+        fontSize: 14,
+        color: '#666',
+        marginBottom: 20,
+    },
+    actionContainer: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        padding: 20,
+        borderTopWidth: 1,
+        borderTopColor: '#eee',
+    },
 });
+
+export default ContentDetailScreen;

@@ -1,5 +1,5 @@
-import { Pressable, StyleSheet, View, Text } from 'react-native';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
+import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { AuthContext } from '../../store/auth-context';
 
@@ -13,44 +13,51 @@ function ActionButton({ onPress, userId, type = 'edit' }) {
 
   const icon = type === 'edit' ? 'create-outline' : 'trash-outline';
   const text = type === 'edit' ? 'Edit' : 'Delete';
+  const buttonStyle = type === 'edit' ? styles.editButton : styles.deleteButton;
+  const textStyle = type === 'edit' ? styles.editText : styles.deleteText;
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{text}</Text>
-      <Pressable
-        style={({ pressed }) => [styles.button, pressed && styles.pressed]}
-        onPress={onPress}
-      >
-        <Ionicons name={icon} size={24} color="white" />
-      </Pressable>
-    </View>
+    <TouchableOpacity
+      style={[styles.button, buttonStyle]}
+      onPress={onPress}
+      activeOpacity={0.7}
+    >
+      <Ionicons name={icon} size={20} style={styles.icon} />
+      <Text style={[styles.text, textStyle]}>{text}</Text>
+    </TouchableOpacity>
   );
 }
 
 export default ActionButton;
 
 const styles = StyleSheet.create({
-  container: {
+  button: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
     alignItems: 'center',
-    margin: 10,
-    gap: 10,
+    justifyContent: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+    marginHorizontal: 5,
+  },
+  editButton: {
+    backgroundColor: '#f0f0f0',
+  },
+  deleteButton: {
+    backgroundColor: '#ffe5e5',
   },
   text: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 18,
+    fontWeight: '600',
+    fontSize: 14,
+    marginLeft: 5,
   },
-  button: {
-    width: 50,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 25,
-    backgroundColor: 'black',
+  editText: {
+    color: '#007AFF',
   },
-  pressed: {
-    opacity: 0.7,
+  deleteText: {
+    color: '#FF3B30',
+  },
+  icon: {
+    marginRight: 5,
   },
 });

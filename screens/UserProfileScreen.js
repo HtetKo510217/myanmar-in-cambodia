@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
-import { View, Text, TextInput, StyleSheet, Alert, FlatList, ActivityIndicator, TouchableOpacity, Modal } from 'react-native';
-import { Avatar, Card, Icon, Button as ElementsButton } from 'react-native-elements';
+import { View, Text, TextInput, StyleSheet, Alert, FlatList, ActivityIndicator, TouchableOpacity, Modal, ImageBackground, SafeAreaView } from 'react-native';
+import { Avatar, Icon } from 'react-native-elements';
+import { BlurView } from 'expo-blur';
+import { LinearGradient } from 'expo-linear-gradient';
 import { getUserProfile, updateUserProfile, deleteUser } from '../util/user';
 import { getData, deleteData } from '../util/http';
 import { AuthContext } from '../store/auth-context';
 import { PostContext } from '../store/post-context';
 import { useFocusEffect } from '@react-navigation/native';
-import ContentItem from '../components/content/ContentItem';
+
 function UserProfileScreen({ navigation }) {
   const authCtx = useContext(AuthContext);
   const { setPosts } = useContext(PostContext);
@@ -96,10 +98,10 @@ function UserProfileScreen({ navigation }) {
 
   const handleDelete = async () => {
     try {
-      await deleteUser(userId, idToken);
       for (const post of userPosts) {
         await deleteData(post.id);
       }
+      await deleteUser(userId, idToken);
       Alert.alert('Success', 'Account deleted successfully.');
       authCtx.logout();
     } catch (error) {
@@ -107,15 +109,15 @@ function UserProfileScreen({ navigation }) {
     }
   };
 
-  const renderContentItem = ({ item }) => {
-    return (
-      <ContentItem
-        id={item.id}
-        title={item.title}
-        imageUrl={item.imageUrl}
-      />
-    );
-  };
+  const renderContentItem = ({ item }) => (
+    <TouchableOpacity style={styles.postItem} onPress={() => navigation.navigate('ContentDetail', { contentId: item.id })}>
+      <ImageBackground source={{ uri: item.imageUrl }} style={styles.postImage}>
+        <BlurView intensity={80} tint="dark" style={styles.postTitleContainer}>
+          <Text style={styles.postTitle}>{item.title}</Text>
+        </BlurView>
+      </ImageBackground>
+    </TouchableOpacity>
+  );
 
   if (loading) {
     return (
@@ -126,84 +128,96 @@ function UserProfileScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <LinearGradient
+        colors={['#4c669f', '#3b5998', '#192f6a']}
+        style={styles.gradientBackground}
+      >
+        <View style={styles.profileContainer}>
+          <Avatar
+            rounded
+            size="large"
+            source={require('../assets/images/slider_img/slider_img_04.jpg')}
+            containerStyle={styles.avatar}
+          />
+          <View style={styles.userInfo}>
+            <Text style={styles.name}>{profile.name}</Text>
+            <Text style={styles.email}>{profile.email}</Text>
+          </View>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.profileButton} onPress={() => setModalVisible(true)}>
+            <Icon name="edit" size={20} color="white" />
+            <Text style={styles.buttonText}>Edit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.profileButton} onPress={confirmLogout}>
+            <Icon name="log-out" type="feather" size={20} color="white" />
+            <Text style={styles.buttonText}>Logout</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.profileButton} onPress={confirmDelete}>
+            <Icon name="trash-2" type="feather" size={20} color="white" />
+            <Text style={styles.buttonText}>Delete Account</Text>
+          </TouchableOpacity>
+        </View>
+      </LinearGradient>
+
+      <View style={styles.contentContainer}>
+        <Text style={styles.subtitle}>Your Posts</Text>
+        {userPosts.length > 0 ? (
+          <FlatList
+            data={userPosts}
+            keyExtractor={(item) => item.id}
+            renderItem={renderContentItem}
+            numColumns={2}
+            columnWrapperStyle={styles.postList}
+          />
+        ) : (
+          <Text style={styles.noPostsText}>You have no posts yet.</Text>
+        )}
+      </View>
+
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
+        onRequestClose={() => setModalVisible(!modalVisible)}
       >
-        <View style={styles.modalView}>
-          <Text style={styles.modalText}>Edit Profile</Text>
-          <TextInput
-            style={styles.modalInput}
-            value={profile.name}
-            onChangeText={(text) => setProfile({ ...profile, name: text })}
-            placeholder="Name"
-          />
-          <ElementsButton
-            title="Save Changes"
-            buttonStyle={styles.saveButton}
-            onPress={handleUpdate}
-          />
-          <ElementsButton
-            title="Cancel"
-            buttonStyle={styles.cancelButton}
-            onPress={() => setModalVisible(!modalVisible)}
-          />
-        </View>
+        <BlurView intensity={100} tint="dark" style={styles.modalContainer}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Edit Profile</Text>
+            <TextInput
+              style={styles.modalInput}
+              value={profile.name}
+              onChangeText={(text) => setProfile({ ...profile, name: text })}
+              placeholder="Name"
+            />
+            <TextInput
+              style={styles.modalInput}
+              value={profile.email}
+              onChangeText={(text) => setProfile({ ...profile, email: text })}
+              placeholder="Email"
+            />
+            <TouchableOpacity style={styles.saveButton} onPress={handleUpdate}>
+              <Text style={styles.buttonText}>Save Changes</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.cancelButton} onPress={() => setModalVisible(!modalVisible)}>
+              <Text style={styles.buttonText}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </BlurView>
       </Modal>
-
-      <View style={styles.profileContainer}>
-        <Avatar
-          rounded
-          size="large"
-          source={require('../assets/images/slider_img/slider_img_04.jpg')}
-          containerStyle={styles.avatar}
-        />
-        <Text style={styles.name}>{profile.name}</Text>
-        <Text style={styles.email}>{profile.email}</Text>
-        <View style={styles.buttonContainer}>
-          <ElementsButton
-            icon={<Icon name="edit" size={15} color="white" />}
-            title="Edit Profile"
-            buttonStyle={styles.editButton}
-            onPress={() => setModalVisible(true)}
-          />
-          <ElementsButton
-            title="Logout"
-            buttonStyle={styles.logoutButton}
-            onPress={confirmLogout}
-          />
-        </View>
-      </View>
-      <Text style={styles.subtitle}>Your Posts</Text>
-      {userPosts.length > 0 ? (
-        <FlatList
-          data={userPosts}
-          keyExtractor={(item) => item.id}
-          renderItem={renderContentItem}
-        />
-      ) : (
-        <Text style={styles.noPostsText}>You have no posts yet.</Text>
-      )}
-      <ElementsButton
-        title="Delete Account"
-        buttonStyle={styles.deleteButton}
-        onPress={confirmDelete}
-        containerStyle={styles.deleteButtonContainer}
-      />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
-    backgroundColor: '#fff',
+    backgroundColor: '#f0f2f5',
+  },
+  gradientBackground: {
+    paddingTop: 20,
+    paddingBottom: 20,
   },
   loadingContainer: {
     flex: 1,
@@ -211,31 +225,94 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   profileContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
-    backgroundColor: '#f8f8f8',
-    borderRadius: 10,
-    padding: 20,
+    paddingHorizontal: 20,
   },
   avatar: {
-    marginBottom: 10,
+    marginRight: 15,
+    borderWidth: 3,
+    borderColor: 'white',
+  },
+  userInfo: {
+    flex: 1,
   },
   name: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 5,
+    color: 'white',
   },
   email: {
-    fontSize: 16,
-    color: 'gray',
-    marginBottom: 10,
+    fontSize: 14,
+    color: '#e0e0e0',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 15,
+    paddingHorizontal: 10,
+  },
+  profileButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    paddingVertical: 8,
+    paddingHorizontal: 15,
+    borderRadius: 20,
+  },
+  buttonText: {
+    color: 'white',
+    marginLeft: 5,
+    fontWeight: '600',
+  },
+  contentContainer: {
+    flex: 1,
+    padding: 15,
   },
   subtitle: {
     fontSize: 20,
-    marginVertical: 15,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    color: '#333',
+  },
+  postList: {
+    justifyContent: 'space-between',
+  },
+  postItem: {
+    width: '48%',
+    aspectRatio: 1,
+    marginBottom: 15,
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+  postImage: {
+    width: '100%',
+    height: '100%',
+  },
+  postTitleContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: 10,
+  },
+  postTitle: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  noPostsText: {
+    fontSize: 16,
+    color: '#666',
+    textAlign: 'center',
+    marginTop: 20,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modalView: {
-    margin: 20,
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 35,
@@ -251,73 +328,32 @@ const styles = StyleSheet.create({
   },
   modalText: {
     marginBottom: 15,
-    textAlign: 'center',
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
+    color: '#333',
   },
   modalInput: {
-    height: 40,
-    borderColor: 'gray',
+    height: 50,
+    borderColor: '#ddd',
     borderWidth: 1,
+    borderRadius: 10,
     marginBottom: 20,
-    paddingHorizontal: 10,
-    width: '80%',
-    textAlign: 'center',
+    paddingHorizontal: 15,
+    width: 250,
+    fontSize: 16,
   },
   saveButton: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#4CAF50',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 25,
     marginBottom: 10,
   },
   cancelButton: {
-    backgroundColor: 'gray',
-    marginBottom: 10,
-  },
-  editButton: {
-    backgroundColor: '#007bff',
-    marginBottom: 10,
-  },
-  logoutButton: {
-    backgroundColor: '#ff6347',
-    marginBottom: 10,
-  },
-  card: {
-    marginBottom: 15,
-    borderRadius: 10,
-    overflow: 'hidden',
-  },
-  cardImage: {
-    height: 200,
-  },
-  cardTitleContainer: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-  },
-  cardTitle: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  noPostsText: {
-    fontSize: 18,
-    color: 'gray',
-    textAlign: 'center',
-    marginTop: 20,
-  },
-  deleteButton: {
-    backgroundColor: 'red',
-  },
-  deleteButtonContainer: {
-    marginTop: 20,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    gap: 15,
-    marginTop: 10,
+    backgroundColor: '#999',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 25,
   },
 });
 

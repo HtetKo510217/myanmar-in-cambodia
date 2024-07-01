@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Pressable, Image, Platform } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { BlurView } from 'expo-blur';
 
 function ContentItem({ id, title, imageUrl }) {
     const navigation = useNavigation();
@@ -12,39 +13,40 @@ function ContentItem({ id, title, imageUrl }) {
     }
 
     return (
-        <Pressable style={styles.container} onPress={pressHandler}>
-            <Image source={{ uri: imageUrl }} style={styles.image} />
-            <Text style={styles.title}>{title}</Text>
+        <Pressable style={styles.postItem} onPress={pressHandler}>
+            <ImageBackground source={{ uri: imageUrl }} style={styles.postImage}>
+                <BlurView intensity={80} tint="dark" style={styles.postTitleContainer}>
+                    <Text style={styles.postTitle}>{title}</Text>
+                </BlurView>
+            </ImageBackground>
         </Pressable>
     );
 }
 
-export default ContentItem;
-
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        margin: 10,
+    postItem: {
+        width: '48%',
+        aspectRatio: 1,
+        marginBottom: 15,
         borderRadius: 10,
-        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
-        backgroundColor: '#F0F0F0',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 5,
-        elevation: 3,
+        overflow: 'hidden',
+    },
+    postImage: {
+        width: '100%',
+        height: '100%',
+    },
+    postTitleContainer: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
         padding: 10,
     },
-    image: {
-        width: '100%',
-        height: 150,
-        resizeMode: 'cover',
-        borderRadius: 10,
-    },
-    title: {
-        fontSize: 16,
+    postTitle: {
+        color: 'white',
+        fontSize: 14,
         fontWeight: 'bold',
-        marginVertical: 10,
-        color: '#000',
     },
 });
+
+export default ContentItem;

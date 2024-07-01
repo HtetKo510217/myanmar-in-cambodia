@@ -1,14 +1,29 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import DrawerNavigator from './DrawerNavigator';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import ContentScreen from '../../screens/ContentScreen';
 import ContentDetailScreen from '../../screens/ContentDetailScreen';
 import EditContentScreen from '../../screens/EditContentScreen';
 import JoinCommunityScreen from '../../screens/JoinCommunityScreen';
 import KhmerLearningScreen from '../../screens/KhmerLearningScreen';
 import PostContextProvider from '../../store/post-context';
-
+import BottomTabsNavigator from './BottomTabsNavigator';
+import FAQScreen from '../../screens/FaqScreen';
+import AboutMe from '../../screens/AboutMeScreen';
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+function DrawerNavigator() {
+    return (
+        <Drawer.Navigator>
+            <Drawer.Screen
+                name="BottomTabs"
+                component={BottomTabsNavigator}
+                options={{ headerShown: false }}
+            />
+        </Drawer.Navigator>
+    );
+}
 
 function AuthenticatedStack() {
     return (
@@ -22,7 +37,7 @@ function AuthenticatedStack() {
                 }}
             >
                 <Stack.Screen
-                    name="Home screen"
+                    name="Drawer"
                     component={DrawerNavigator}
                     options={{ headerShown: false }}
                 />
@@ -50,6 +65,24 @@ function AuthenticatedStack() {
                     name="KhmerLearning"
                     component={KhmerLearningScreen}
                     options={{ title: 'Khmer Learning' }}
+                />
+
+                <Stack.Screen
+                    name="FAQ"
+                    component={FAQScreen}
+                    options={{ title: 'FAQ' }}
+                />
+
+                <Stack.Screen
+                    name="AboutMe"
+                    component={AboutMe}
+                    options={{ title: 'About Me' }}
+                />
+
+                <Stack.Screen
+                    name="BottomTabs"
+                    component={BottomTabsNavigator}
+                    options={{ headerShown: false }}
                 />
             </Stack.Navigator>
         </PostContextProvider>

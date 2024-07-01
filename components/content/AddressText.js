@@ -1,32 +1,43 @@
 import React from 'react';
-import { Text, Linking , StyleSheet} from 'react-native';
+import { Text, TouchableOpacity, StyleSheet , Linking } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-const AddressText = ({ address }) => {
+const AddressText = ({ address, style }) => {
     const isLink = address.startsWith('http') || address.startsWith('https');
 
-    if (isLink) {
-        return (
-            <Text
-                style={[styles.address, { textDecorationLine: 'underline' }]}
-                onPress={() => Linking.openURL(address)}
-            >
+    const handlePress = () => {
+        if (isLink) {
+            Linking.openURL(address);
+        }
+    };
+
+    return (
+        <TouchableOpacity 
+            style={styles.container} 
+            onPress={handlePress} 
+            disabled={!isLink}
+        >
+            <Text style={[styles.address, style, isLink && styles.link]}>
                 {address}
             </Text>
-        );
-    } else {
-        return <Text style={styles.address}>{address}</Text>;
-    }
+        </TouchableOpacity>
+    );
 };
 
-export default AddressText;
-
 const styles = StyleSheet.create({
-    address: {
-        color: '#FA6326',
-        fontSize: 16,
-        margin: 10,
-        textAlign: 'center',
-        fontStyle: 'italic',
-        fontWeight: 'bold',
+    container: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
-})
+    address: {
+        fontSize: 14,
+        color: '#666',
+        flex: 1,
+    },
+    link: {
+        color: '#007AFF',
+        textDecorationLine: 'underline',
+    },
+});
+
+export default AddressText;
