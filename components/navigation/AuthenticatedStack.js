@@ -6,6 +6,7 @@ import ContentDetailScreen from '../../screens/ContentDetailScreen';
 import EditContentScreen from '../../screens/EditContentScreen';
 import JoinCommunityScreen from '../../screens/JoinCommunityScreen';
 import KhmerLearningScreen from '../../screens/KhmerLearningScreen';
+import KhmerLearningDetailScreen from '../../screens/KhmerLearningDetailScreen';
 import PostContextProvider from '../../store/post-context';
 import BottomTabsNavigator from './BottomTabsNavigator';
 import FAQScreen from '../../screens/FaqScreen';
@@ -65,6 +66,12 @@ function AuthenticatedStack() {
                     name="KhmerLearning"
                     component={KhmerLearningScreen}
                     options={{ title: 'Khmer Learning' }}
+                />
+
+                <Stack.Screen
+                    name="KhmerLearningDetail"
+                    component={KhmerLearningDetailScreen}
+                    options={{ title: 'Khmer Learning Detail' }}
                 />
 
                 <Stack.Screen
