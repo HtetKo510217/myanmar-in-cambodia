@@ -37,7 +37,7 @@ function BottomTabsNavigator() {
                 tabBarInactiveTintColor: 'gray',
                 headerStyle: { backgroundColor: '#FFC30B' },
                 headerTintColor: 'white',
-                tabBarStyle: { backgroundColor: '#fff' },
+                tabBarStyle: { backgroundColor: '#fff' , height: 60, paddingBottom: 10, paddingTop: 10},
             })}
         >
             <Tab.Screen name="Home" component={HomeScreen} />

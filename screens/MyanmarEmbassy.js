@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
         padding: 16,
-        backgroundColor: '#FFFAE6',
+        // backgroundColor: '#FFFAE6',
     },
     image: {
         width: '100%',
@@ -65,12 +65,12 @@ const styles = StyleSheet.create({
     infoText: {
         marginLeft: 15,
         fontSize: 16,
-        color: '#555',
+        color: '#000',
     },
     officeHours: {
         marginTop: 16,
         fontSize: 16,
-        color: '#777',
+        color: '#000',
         textAlign: 'center',
     },
 });

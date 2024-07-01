@@ -141,8 +141,8 @@ function UserProfileScreen({ navigation }) {
             containerStyle={styles.avatar}
           />
           <View style={styles.userInfo}>
-            <Text style={styles.name}>{profile.name}</Text>
-            <Text style={styles.email}>{profile.email}</Text>
+            <Text style={styles.name}>{profile?.name}</Text>
+            <Text style={styles.email}>{profile?.email}</Text>
           </View>
         </View>
         <View style={styles.buttonContainer}>
@@ -187,13 +187,14 @@ function UserProfileScreen({ navigation }) {
             <Text style={styles.modalText}>Edit Profile</Text>
             <TextInput
               style={styles.modalInput}
-              value={profile.name}
+              value={profile?.name}
               onChangeText={(text) => setProfile({ ...profile, name: text })}
               placeholder="Name"
             />
             <TextInput
               style={styles.modalInput}
-              value={profile.email}
+              value={profile?.email}
+              editable={false}
               onChangeText={(text) => setProfile({ ...profile, email: text })}
               placeholder="Email"
             />
