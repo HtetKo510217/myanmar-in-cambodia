@@ -9,6 +9,7 @@ import { CATEGORIES } from '../../data/category';
 import { useNavigation } from '@react-navigation/native';
 import LoadingOverlay from '../ui/LoadingOverlay';
 import { AuthContext } from '../../store/auth-context';
+import { PostContext } from '../../store/post-context';
 import Toast from 'react-native-root-toast';
 
 const AddContentForm = ({ onContentAdd }) => {
@@ -22,7 +23,7 @@ const AddContentForm = ({ onContentAdd }) => {
   const [errors, setErrors] = useState({});
   const navigation = useNavigation();
   const { userId } = useContext(AuthContext);
-
+  const { addPost } = useContext(PostContext);
   const validateForm = () => {
     const newErrors = {};
     if (!contentTitle) newErrors.title = 'Title is required.';
@@ -68,21 +69,27 @@ const AddContentForm = ({ onContentAdd }) => {
         address
       );
       onContentAdd(newContent);
+      addPost({
+        ...newContent,
+        imageUrl: contentImageUri,
+      });
       setContentTitle('');
       setContentImageUri('');
       setContentImageUrl(null);
       setContentDescription('');
       setSelectedCategories([]);
       setAddress('');
-      Toast.show('Content added successfully!', {
+      Toast.show('ပို့စ် အသစ်ကို အောင်မြင်စွာ တင်ပြီးပါပြီ။', {
         duration: Toast.durations.SHORT,
-        position: Toast.positions.BOTTOM,
+        position: Toast.positions.CENTER,
         shadow: true,
         animation: true,
         hideOnPress: true,
         backgroundColor: 'green',
       });
-      navigation.goBack();
+      navigation.navigate('ContentDetail', {
+        contentId: newContent.id,
+    });
     }, 2000);
   };
 

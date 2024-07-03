@@ -65,13 +65,13 @@ function AuthenticatedStack() {
                 <Stack.Screen
                     name="KhmerLearning"
                     component={KhmerLearningScreen}
-                    options={{ title: 'Khmer Learning' }}
+                    options={{ title: 'အခြေခံ ခမာ စကား' }}
                 />
 
                 <Stack.Screen
                     name="KhmerLearningDetail"
                     component={KhmerLearningDetailScreen}
-                    options={{ title: 'Khmer Learning Detail' }}
+                    options={{ title: 'အခြေခံ ခမာ စကား' }}
                 />
 
                 <Stack.Screen

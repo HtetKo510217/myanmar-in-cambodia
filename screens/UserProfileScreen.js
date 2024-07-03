@@ -190,6 +190,7 @@ function UserProfileScreen({ navigation }) {
               value={profile?.name}
               onChangeText={(text) => setProfile({ ...profile, name: text })}
               placeholder="Name"
+              placeholderTextColor={'#aaa'}
             />
             <TextInput
               style={styles.modalInput}

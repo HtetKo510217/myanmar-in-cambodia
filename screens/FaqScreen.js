@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import { Icon } from 'react-native-elements';
 
@@ -46,76 +46,98 @@ const FaqScreen = () => {
     };
 
     return (
-        <ScrollView style={styles.container}>
-            <Text style={styles.title}>မကြာခဏ မေးလေ့ရှိသော မေးခွန်းများ</Text>
-            {faqData.map((item, index) => (
-                <View key={index} style={styles.faqItem}>
-                    <TouchableOpacity
-                        style={styles.questionContainer}
-                        onPress={() => toggleSection(index)}
-                    >
-                        <Text style={styles.question}>{item.question}</Text>
-                        <Icon
-                            name={activeSections.includes(index) ? 'chevron-up' : 'chevron-down'}
-                            type="feather"
-                            size={20}
-                            color="#007bff"
-                        />
-                    </TouchableOpacity>
-                    <Collapsible collapsed={!activeSections.includes(index)}>
-                        <View style={styles.answerContainer}>
-                            <Text style={styles.answer}>{item.answer}</Text>
-                        </View>
-                    </Collapsible>
-                </View>
-            ))}
-            <Text style={styles.reference}>
-                Reference: FB Account: Maung Maung ,Yar Zar Aye Cho
-            </Text>
-        </ScrollView>
+        <SafeAreaView style={styles.safeArea}>
+            <StatusBar backgroundColor="#FFC30B" barStyle="dark-content" />
+            <View style={styles.header}>
+                <Text style={styles.headerText}>မကြာခဏ မေးလေ့ရှိသော မေးခွန်းများ</Text>
+            </View>
+            <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+                {faqData.map((item, index) => (
+                    <View key={index} style={styles.faqItem}>
+                        <TouchableOpacity
+                            style={styles.questionContainer}
+                            onPress={() => toggleSection(index)}
+                        >
+                            <Text style={styles.question}>{item.question}</Text>
+                            <Icon
+                                name={activeSections.includes(index) ? 'chevron-up' : 'chevron-down'}
+                                type="feather"
+                                size={24}
+                                color="#333"
+                            />
+                        </TouchableOpacity>
+                        <Collapsible collapsed={!activeSections.includes(index)}>
+                            <View style={styles.answerContainer}>
+                                <Text style={styles.answer}>{item.answer}</Text>
+                            </View>
+                        </Collapsible>
+                    </View>
+                ))}
+                <Text style={styles.reference}>
+                    Reference: FB Account: Maung Maung, Yar Zar Aye Cho
+                </Text>
+            </ScrollView>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+        backgroundColor: '#f5f5f5',
+    },
+    header: {
+        padding: 16,
+        alignItems: 'center',
+    },
+    headerText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#333',
+    },
     container: {
         flex: 1,
-        padding: 20,
-        backgroundColor: '#fff',
     },
-    title: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        marginBottom: 20,
-        color: '#333',
-        textAlign: 'center',
+    contentContainer: {
+        padding: 16,
+        paddingBottom: 32,
     },
     faqItem: {
-        marginBottom: 20,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ddd',
-        paddingBottom: 10,
+        marginBottom: 16,
+        backgroundColor: '#fff',
+        borderRadius: 8,
+        overflow: 'hidden',
+        borderWidth: 1,
+        borderColor: '#e0e0e0',
     },
     questionContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        padding: 16,
+        backgroundColor: '#FFC30B',
     },
     question: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: '600',
-        color: '#007bff',
+        color: '#333',
+        flex: 1,
+        marginRight: 8,
     },
     answerContainer: {
-        paddingTop: 10,
+        padding: 16,
+        backgroundColor: '#fff',
     },
     answer: {
-        fontSize: 16,
-        color: '#555',
+        fontSize: 14,
+        color: '#333',
+        lineHeight: 28,
     },
     reference: {
         fontSize: 12,
-        color: '#999',
+        color: '#666',
         marginTop: 20,
+        textAlign: 'center',
     },
 });
 

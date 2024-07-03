@@ -77,9 +77,9 @@ function EditContentScreen({ route, navigation }) {
 
         updatePost(content.id, updatedContent);
         await updateData(updatedContent);
-        Toast.show('Content updated successfully!', {
+        Toast.show('ပို့စ်ကို အောင်မြင်စွာ ပြင်ဆင်ပြီးပါပြီ။', {
             duration: Toast.durations.SHORT,
-            position: Toast.positions.BOTTOM,
+            position: Toast.positions.CENTER,
             shadow: true,
             animation: true,
             hideOnPress: true,

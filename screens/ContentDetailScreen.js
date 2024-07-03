@@ -6,7 +6,6 @@ import ActionButton from '../components/content/ActionButton';
 import { deleteData } from '../util/http';
 import Toast from 'react-native-root-toast';
 import { useFocusEffect } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
 
 function ContentDetailScreen({ route, navigation }) {
     const contentId = route.params.contentId;
@@ -55,9 +54,9 @@ function ContentDetailScreen({ route, navigation }) {
                         onPress: async () => {
                             deletePost(content.id);
                             await deleteData(content.id);
-                            Toast.show('Content deleted successfully!', {
+                            Toast.show('ပို့စ်ကို အောင်မြင်စွာ ဖျက်ပစ်လိုက်ပါပြီ။', {
                                 duration: Toast.durations.SHORT,
-                                position: Toast.positions.BOTTOM,
+                                position: Toast.positions.CENTER,
                                 shadow: true,
                                 animation: true,
                                 hideOnPress: true,
