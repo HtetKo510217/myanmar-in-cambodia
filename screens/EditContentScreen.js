@@ -3,6 +3,7 @@ import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity } from 'rea
 import { Input, Button, Icon } from '@rneui/themed';
 import { Picker } from '@react-native-picker/picker';
 import { PostContext } from '../store/post-context';
+import { AuthContext } from '../store/auth-context';
 import { CATEGORIES } from '../data/category';
 import * as ImagePicker from 'expo-image-picker';
 import { updateData } from '../util/http';
@@ -11,6 +12,7 @@ import Toast from 'react-native-root-toast';
 function EditContentScreen({ route, navigation }) {
     const { contentId } = route.params;
     const { posts, updatePost } = useContext(PostContext);
+    const { token } = useContext(AuthContext);
     const [content, setContent] = useState(null);
     const [contentTitle, setContentTitle] = useState('');
     const [contentDescription, setContentDescription] = useState('');
@@ -76,7 +78,7 @@ function EditContentScreen({ route, navigation }) {
         };
 
         updatePost(content.id, updatedContent);
-        await updateData(updatedContent);
+        await updateData(updatedContent, token);
         Toast.show('ပို့စ်ကို အောင်မြင်စွာ ပြင်ဆင်ပြီးပါပြီ။', {
             duration: Toast.durations.SHORT,
             position: Toast.positions.CENTER,

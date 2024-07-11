@@ -14,7 +14,7 @@
     "ios": {
       "buildNumber": "1.0.0",
       "supportsTablet": true,
-      "bundleIdentifier": "com.htetko.khmerguide"
+      "bundleIdentifier": "com.htetko.myanmar_in_cambodia_guide"
     },
     "android": {
       "versionCode": 1,
@@ -26,7 +26,7 @@
         "android.permission.RECORD_AUDIO",
         "com.google.android.gms.permission.AD_ID"
       ],
-      "package": "com.htetko.khmerguide"
+      "package": "com.htetko.myanmar_in_cambodia_guide"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -42,7 +42,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "0f60b555-c609-4fb9-9d5e-5d84960762b1"
+        "projectId": "a1965db6-c3e7-4cf6-9f76-0c8e09419fd9"
       }
     }
   }

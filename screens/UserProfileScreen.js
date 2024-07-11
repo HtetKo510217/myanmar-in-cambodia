@@ -26,7 +26,7 @@ function UserProfileScreen({ navigation }) {
 
   const fetchProfile = useCallback(async () => {
     try {
-      const userProfile = await getUserProfile(userId);
+      const userProfile = await getUserProfile(userId, idToken);
       setProfile(userProfile);
     } catch (error) {
       Alert.alert('Error', 'Failed to load profile.');
@@ -35,7 +35,7 @@ function UserProfileScreen({ navigation }) {
 
   const fetchUserPosts = useCallback(async () => {
     try {
-      const posts = await getData();
+      const posts = await getData(idToken);
       setPosts(posts);
       const filteredPosts = posts.filter(post => post.userId === userId);
       setUserPosts(filteredPosts);
@@ -59,7 +59,7 @@ function UserProfileScreen({ navigation }) {
 
   const handleUpdate = async () => {
     try {
-      await updateUserProfile(userId, profile);
+      await updateUserProfile(userId, profile, idToken);
       Alert.alert('Success', 'Profile updated successfully.');
       setIsEditing(false);
       setModalVisible(false);
@@ -99,7 +99,7 @@ function UserProfileScreen({ navigation }) {
   const handleDelete = async () => {
     try {
       for (const post of userPosts) {
-        await deleteData(post.id);
+        await deleteData(post.id, idToken);
       }
       await deleteUser(userId, idToken);
       Alert.alert('Success', 'Account deleted successfully.');

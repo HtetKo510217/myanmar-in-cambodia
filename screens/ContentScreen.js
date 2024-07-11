@@ -5,15 +5,17 @@ import { CATEGORIES } from '../data/category';
 import { PostContext } from '../store/post-context';
 import { getData } from '../util/http';
 import { useFocusEffect } from '@react-navigation/native';
+import { AuthContext } from '../store/auth-context';
 
 function ContentScreen({ route, navigation }) {
     const { posts, setPosts } = useContext(PostContext);
+    const { token } = useContext(AuthContext);
     const catId = route.params.categoryId;
     const displayContent = posts.filter((content) => content.categoryIds === catId);
 
     useEffect(() => {
         async function fetchContent() {
-            const contents = await getData();
+            const contents = await getData(token);
             setPosts(contents);
         }
         fetchContent();
