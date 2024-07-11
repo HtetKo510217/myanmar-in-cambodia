@@ -4,11 +4,11 @@ import AddContentForm from './AddContentForm';
 import { uploadToFirebase } from "../../firebase-config"
 import { storeData } from '../../util/http';
 import { PostContext } from '../../store/post-context';
-
+import { AuthContext } from '../../store/auth-context';
 const MainForm = () => {
   const [contents, setContents] = useState([]);
   const { posts, addPost } = useContext(PostContext);
-
+  const { token } = useContext(AuthContext);
   const handleContentAdd = (content) => {
     setContents([...contents, content]);
     storeDataInDB(content);
@@ -31,7 +31,7 @@ const MainForm = () => {
       address: data.address
     }
     addPost(postData);
-    storeData(postData);
+    storeData(postData, token);
   };
 
   return (

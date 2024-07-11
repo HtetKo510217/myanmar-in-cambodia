@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { getStorage, ref, deleteObject } from "firebase/storage";
 const FIREBASE_DATABASE_URL = process.env.EXPO_PUBLIC_FIREBASE_DATABASE_URL;
-export function storeData(data) {
+export function storeData(data, token) {
   axios.post(
     `${FIREBASE_DATABASE_URL}/posts.json?auth=${token}`,
     data
@@ -35,7 +36,19 @@ export async function updateData(data, token) {
 
 export async function deleteData(id, token) {
   try {
-    // First, fetch all comments for this post
+    // Fetch the post data to get the image URL
+    const postResponse = await axios.get(`${FIREBASE_DATABASE_URL}/posts/${id}.json?auth=${token}`);
+    const postData = postResponse.data;
+    const imageUrl = postData.imageUrl;
+
+    // Delete image from Firebase Storage
+    if (imageUrl) {
+      const storage = getStorage();
+      const imageRef = ref(storage, imageUrl);
+      await deleteObject(imageRef);
+    }
+
+    // Fetch all comments for this post
     const commentsResponse = await axios.get(
       `${FIREBASE_DATABASE_URL}/comments.json?orderBy="postId"&equalTo="${id}"&auth=${token}`
     );
@@ -49,13 +62,13 @@ export async function deleteData(id, token) {
     // Delete all comments
     await Promise.all(deleteCommentPromises);
 
-    // Then delete the post
+    // Delete the post
     await axios.delete(`${FIREBASE_DATABASE_URL}/posts/${id}.json?auth=${token}`);
 
-    console.log(`Post ${id} and its comments deleted successfully`);
+    console.log(`Post ${id}, its comments, and associated image deleted successfully`);
   } catch (error) {
-    console.error('Error deleting post and comments:', error);
-    throw error; // Re-throw the error so it can be handled by the calling function
+    console.error('Error deleting post, comments, and image:', error);
+    throw error;
   }
 }
 
